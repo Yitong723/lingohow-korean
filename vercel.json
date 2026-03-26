@@ -1,0 +1,11 @@
+{
+  "outputDirectory": "website",
+  "rewrites": [
+    { "source": "/episode1", "destination": "/episode1.html" },
+    { "source": "/episode2", "destination": "/episode2.html" },
+    { "source": "/episode3", "destination": "/episode3.html" },
+    { "source": "/recording", "destination": "/recording.html" },
+    { "source": "/mobile-reading", "destination": "/mobile-reading.html" },
+    { "source": "/timestamp-tool", "destination": "/timestamp_tool.html" }
+  ]
+}
