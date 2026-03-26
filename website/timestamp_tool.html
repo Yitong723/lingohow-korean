@@ -18,6 +18,10 @@
   .btn-row { display: flex; gap: 8px; margin: 10px 0; flex-wrap: wrap; }
   .btn-row button { padding: 8px 16px; border-radius: 6px; border: 1px solid #ccc; background: #fff; cursor: pointer; font-size: 13px; }
   .btn-row button:hover { background: #f0f0f0; }
+  .btn-row button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-row button:disabled:hover { background: #fff; }
+  .btn-reopen { background: #FF9800 !important; color: #fff !important; border-color: #FF9800 !important; font-weight: bold; }
+  .btn-reopen:hover { background: #F57C00 !important; }
   #counter { font-size: 18px; font-weight: bold; color: #8B2252; margin: 10px 0; }
 
   .sentence-list { margin: 10px 0; }
@@ -35,8 +39,11 @@
   .sent-kr { font-weight: 500; }
   .sent-cn { color: #888; font-size: 12px; }
 
+  .locked-banner { background: #e8f5e9; border: 2px solid #4CAF50; border-radius: 8px; padding: 14px 18px; margin: 10px 0; display: flex; align-items: center; justify-content: space-between; }
+  .locked-banner .locked-text { font-size: 15px; font-weight: bold; color: #2e7d32; }
+  .locked-banner .locked-sub { font-size: 12px; color: #666; margin-top: 2px; }
+
   .status-bar { background: #e8f5e9; padding: 10px 14px; border-radius: 8px; margin: 10px 0; font-size: 14px; color: #2e7d32; display: none; }
-  .status-bar.warn { background: #fff3cd; color: #856404; }
 </style>
 </head>
 <body>
@@ -58,10 +65,18 @@
 
   <div id="counter">已打 0 / 0 个点</div>
 
-  <div class="btn-row">
-    <button onclick="markTime()">打点 (空格)</button>
-    <button onclick="undoLast()">撤销 (Z)</button>
-    <button onclick="clearAll()">清空本EP</button>
+  <div id="lockedBanner" class="locked-banner" style="display:none;">
+    <div>
+      <div class="locked-text">已完成打点</div>
+      <div class="locked-sub">数据已锁定，如需修改请点击右侧按钮</div>
+    </div>
+    <button class="btn-reopen" onclick="unlockEp()">重新打点</button>
+  </div>
+
+  <div class="btn-row" id="editButtons">
+    <button id="btnMark" onclick="markTime()">打点 (空格)</button>
+    <button id="btnUndo" onclick="undoLast()">撤销 (Z)</button>
+    <button id="btnClear" onclick="clearAll()">清空本EP</button>
   </div>
 
   <div class="sentence-list" id="sentenceList"></div>
@@ -137,6 +152,7 @@
     var player = document.getElementById('player');
     var marks = [];
     var currentEp = 1;
+    var locked = false;
     var STORAGE_KEY = 'timestamp_tool_marks';
 
     // ===== localStorage 持久化 =====
@@ -151,18 +167,20 @@
       var all = loadAllMarks();
       all[currentEp] = marks;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
-      // 同步生成完整字幕数据供录屏版/跟读版读取
       saveSubtitleData();
       updateTabBadges();
       showAutoSaveHint();
+      // 打完自动锁定
+      if (marks.length >= epConfig[currentEp].sentences.length) {
+        locked = true;
+        updateLockUI();
+      }
     }
 
-    // 将当前 EP 的打点数据转为字幕格式，存入 localStorage
     var SUBTITLE_KEY = 'timestamp_tool_subtitles';
     function saveSubtitleData() {
       var sents = epConfig[currentEp].sentences;
       if (marks.length === 0) {
-        // 清空时也同步删除字幕数据
         try {
           var allSubs = JSON.parse(localStorage.getItem(SUBTITLE_KEY) || '{}');
           delete allSubs[currentEp];
@@ -193,6 +211,37 @@
       delete all[ep];
       localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
       updateTabBadges();
+    }
+
+    // ===== 锁定/解锁 UI =====
+    function isEpComplete(ep) {
+      var saved = loadMarksForEp(ep);
+      return saved.length >= epConfig[ep].sentences.length;
+    }
+
+    function updateLockUI() {
+      var banner = document.getElementById('lockedBanner');
+      var editBtns = document.getElementById('editButtons');
+      if (locked) {
+        banner.style.display = 'flex';
+        document.getElementById('btnMark').disabled = true;
+        document.getElementById('btnUndo').disabled = true;
+        document.getElementById('btnClear').disabled = true;
+      } else {
+        banner.style.display = 'none';
+        document.getElementById('btnMark').disabled = false;
+        document.getElementById('btnUndo').disabled = false;
+        document.getElementById('btnClear').disabled = false;
+      }
+    }
+
+    function unlockEp() {
+      if (!confirm('确定要清空 EP' + currentEp + ' 的打点数据并重新打点吗？')) return;
+      marks = [];
+      clearMarksForEp(currentEp);
+      locked = false;
+      updateLockUI();
+      render();
     }
 
     // ===== 自动保存提示 =====
@@ -235,7 +284,7 @@
         var targetEp = parseInt(epId);
         if (targetEp === currentEp) return;
         var sents = epConfig[currentEp].sentences;
-        if (marks.length > 0 && marks.length < sents.length) {
+        if (!locked && marks.length > 0 && marks.length < sents.length) {
           if (!confirm('EP' + currentEp + ' 还有 ' + (sents.length - marks.length) + ' 句未打点，确定切换吗？\n（进度已自动保存，切回来可继续）')) return;
         }
         switchEp(targetEp);
@@ -252,6 +301,8 @@
       document.getElementById('videoSrc').src = epConfig[ep].video;
       player.load();
       marks = loadMarksForEp(ep);
+      locked = isEpComplete(ep);
+      updateLockUI();
       render();
     }
 
@@ -262,6 +313,7 @@
     }
 
     function markTime() {
+      if (locked) return;
       var sents = epConfig[currentEp].sentences;
       if (marks.length >= sents.length) return;
       marks.push(player.currentTime);
@@ -272,6 +324,7 @@
     }
 
     function undoLast() {
+      if (locked) return;
       if (marks.length === 0) return;
       marks.pop();
       saveMarks();
@@ -279,6 +332,7 @@
     }
 
     function clearAll() {
+      if (locked) return;
       if (marks.length === 0) return;
       if (!confirm('确定清空 EP' + currentEp + ' 的所有打点数据吗？')) return;
       marks = [];
@@ -291,7 +345,10 @@
       var total = sents.length;
       var done = marks.length;
 
-      document.getElementById('counter').textContent = '已打 ' + done + ' / ' + total + ' 个点' + (done >= total ? ' ✅ 已完成' : '');
+      var statusText = '已打 ' + done + ' / ' + total + ' 个点';
+      if (locked) statusText += ' ✅ 已完成（已锁定）';
+      else if (done >= total) statusText += ' ✅ 已完成';
+      document.getElementById('counter').textContent = statusText;
 
       var html = '';
       for (var i = 0; i < total; i++) {
@@ -302,7 +359,7 @@
           var start = marks[i].toFixed(1);
           var end = (i < done - 1) ? marks[i + 1].toFixed(1) : (i === total - 1 ? '末尾' : '...');
           timeStr = start + ' → ' + end;
-        } else if (i === done) {
+        } else if (i === done && !locked) {
           cls += ' current';
           timeStr = '⏎ 下一个打点';
         } else {
@@ -319,6 +376,7 @@
 
     // Keyboard shortcuts
     document.addEventListener('keydown', function(e) {
+      if (locked) return;
       if (e.code === 'Space' && document.activeElement.tagName !== 'BUTTON' && document.activeElement.tagName !== 'INPUT') {
         e.preventDefault();
         markTime();
