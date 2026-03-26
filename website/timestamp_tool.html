@@ -137,8 +137,36 @@
       var all = loadAllMarks();
       all[currentEp] = marks;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+      // 同步生成完整字幕数据供录屏版/跟读版读取
+      saveSubtitleData();
       updateTabBadges();
       showAutoSaveHint();
+    }
+
+    // 将当前 EP 的打点数据转为字幕格式，存入 localStorage
+    var SUBTITLE_KEY = 'timestamp_tool_subtitles';
+    function saveSubtitleData() {
+      var sents = epConfig[currentEp].sentences;
+      if (marks.length === 0) {
+        // 清空时也同步删除字幕数据
+        try {
+          var allSubs = JSON.parse(localStorage.getItem(SUBTITLE_KEY) || '{}');
+          delete allSubs[currentEp];
+          localStorage.setItem(SUBTITLE_KEY, JSON.stringify(allSubs));
+        } catch(e) {}
+        return;
+      }
+      var subtitles = [];
+      for (var i = 0; i < marks.length; i++) {
+        var start = parseFloat(marks[i].toFixed(1));
+        var end = (i < marks.length - 1) ? parseFloat(marks[i + 1].toFixed(1)) : parseFloat((marks[i] + 10).toFixed(1));
+        subtitles.push({ start: start, end: end, kr: sents[i].kr, cn: sents[i].cn });
+      }
+      try {
+        var allSubs = JSON.parse(localStorage.getItem(SUBTITLE_KEY) || '{}');
+        allSubs[currentEp] = { title: epConfig[currentEp].title, subtitles: subtitles };
+        localStorage.setItem(SUBTITLE_KEY, JSON.stringify(allSubs));
+      } catch(e) {}
     }
 
     function loadMarksForEp(ep) {

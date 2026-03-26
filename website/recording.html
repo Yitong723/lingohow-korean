@@ -228,9 +228,6 @@
 
 </div>
 
-<!-- 从 data/subtitles.js 加载字幕数据（file:// 可用）-->
-<!-- 更新方法：打点导出JSON后运行 python3 data/build_data_js.py -->
-<script src="data/subtitles.js"></script>
 <script>
 (function() {
   // ===== 配置：在这里添加新 EP =====
@@ -305,13 +302,18 @@
 
     player.src = episodes[idx].video;
 
-    // 从 EP_DATA 读取字幕（由 subtitles.js 提供）
+    // 从 localStorage 读取字幕数据（由打点工具自动写入）
     var epId = episodes[idx].id;
-    if (EP_DATA && EP_DATA[epId]) {
-      renderSubtitles(EP_DATA[epId]);
+    var epData = null;
+    try {
+      var allSubs = JSON.parse(localStorage.getItem('timestamp_tool_subtitles') || '{}');
+      epData = allSubs[epId] || null;
+    } catch(e) {}
+
+    if (epData && epData.subtitles && epData.subtitles.length > 0) {
+      renderSubtitles(epData);
     } else {
-      // 无打点数据时清空字幕区，显示提示
-      subtitleList.innerHTML = '<div style="text-align:center;color:#999;padding:40px 20px;font-size:0.85rem;">该EP还没有打点数据<br>请先用打点工具打点后运行<br><code>python3 data/build_data_js.py</code></div>';
+      subtitleList.innerHTML = '<div style="text-align:center;color:#999;padding:40px 20px;font-size:0.85rem;">该EP还没有打点数据<br>请先用打点工具完成打点</div>';
       cards = [];
       activeCard = null;
     }
