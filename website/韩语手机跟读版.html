@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>手机跟读版 - 养成地道韩语大脑</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #3A8B6C;
+      --primary-light: #52A685;
+      --accent: #2E7D5E;
+      --bg: #EFF8F4;
+      --card-bg: #FFFFFF;
+      --text: #2A3530;
+      --text-light: #6B7F76;
+      --border: #C8DDD4;
+      --active-bg: #FFF8E1;
+      --active-border: #FFD54F;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #E4F0EA;
+      color: var(--text);
+      -webkit-text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .phone-frame {
+      width: 390px;
+      height: 100vh;
+      height: 100dvh;
+      max-height: 844px;
+      margin: 0 auto;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 40px rgba(0,0,0,0.12);
+    }
+    @media (max-width: 430px) {
+      .phone-frame {
+        width: 100%;
+        max-height: none;
+        height: 100vh;
+        height: 100dvh;
+        box-shadow: none;
+        border-radius: 0;
+      }
+      body { background: var(--bg); }
+    }
+    @media (min-width: 431px) {
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .phone-frame {
+        border-radius: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+    }
+
+    .nav {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 44px;
+      flex-shrink: 0;
+    }
+    .nav-back {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+      flex: 1;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 8px;
+    }
+    .nav-badge {
+      font-size: 0.7rem;
+      background: var(--primary);
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+
+    .ep-tabs {
+      flex-shrink: 0;
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .ep-tab {
+      flex: 1;
+      padding: 10px 0;
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-light);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      -webkit-tap-highlight-color: transparent;
+      transition: all 0.2s;
+    }
+    .ep-tab.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      font-weight: 700;
+    }
+
+    .video-section {
+      flex-shrink: 0;
+      background: #000;
+      position: relative;
+    }
+    .video-section video {
+      width: 100%;
+      display: block;
+      height: 220px;
+      object-fit: contain;
+      background: #000;
+    }
+    .video-slogan {
+      position: absolute;
+      bottom: 8px;
+      right: 10px;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      pointer-events: none;
+    }
+
+    .subtitle-list {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 8px 10px;
+    }
+
+    .sub-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 13px;
+      margin-bottom: 7px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .sub-card.active {
+      background: var(--active-bg);
+      border-color: var(--active-border);
+      box-shadow: 0 2px 10px rgba(255,213,79,0.25);
+    }
+
+    .sub-time {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+    .sub-card.active .sub-time { color: #E65100; }
+
+    .sub-kr {
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.7;
+      margin-bottom: 2px;
+      word-break: break-word;
+    }
+    .sub-cn {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* Keyword highlights */
+    .hl-blue { background: linear-gradient(180deg, transparent 60%, rgba(27,58,107,0.22) 60%); color: #1B3A6B; font-weight: 500; padding: 0 2px; }
+    .hl-red { background: linear-gradient(180deg, transparent 60%, rgba(199,62,58,0.22) 60%); color: #C73E3A; font-weight: 500; padding: 0 2px; }
+    .hl-green { background: linear-gradient(180deg, transparent 60%, rgba(46,107,79,0.22) 60%); color: #2E6B4F; font-weight: 500; padding: 0 2px; }
+    .hl-purple { background: linear-gradient(180deg, transparent 60%, rgba(126,58,183,0.22) 60%); color: #7E3AB7; font-weight: 500; padding: 0 2px; }
+    .hl-orange { background: linear-gradient(180deg, transparent 60%, rgba(194,120,3,0.22) 60%); color: #A16207; font-weight: 500; padding: 0 2px; }
+    .hl-teal { background: linear-gradient(180deg, transparent 60%, rgba(13,148,136,0.22) 60%); color: #0D9488; font-weight: 500; padding: 0 2px; }
+
+    .bottom-bar {
+      flex-shrink: 0;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 8px 10px;
+      padding-bottom: calc(8px + env(safe-area-inset-bottom));
+    }
+    .bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .bar-btn-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      min-width: 44px;
+    }
+    .bar-btn-group .bar-icon { font-size: 1.2rem; line-height: 1; }
+    .bar-btn-group .bar-label { font-size: 0.6rem; color: var(--text-light); }
+    .bar-btn-group.active .bar-icon,
+    .bar-btn-group.active .bar-label { color: var(--primary); }
+
+    .btn-play-main {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 14px rgba(76,175,80,0.4);
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
+      margin: -10px 0;
+    }
+  </style>
+</head>
+<body>
+<div class="phone-frame">
+
+  <div class="nav">
+    <a href="index.html" class="nav-back">← 返回</a>
+    <div class="nav-title">养成地道韩语大脑</div>
+    <span class="nav-badge">跟读</span>
+  </div>
+
+  <div class="ep-tabs" id="epTabs">
+    <!-- 动态生成 -->
+  </div>
+
+  <div class="video-section" id="videoSection">
+    <video id="player" preload="metadata" playsinline webkit-playsinline></video>
+    <div class="video-slogan">跟着油管 每天无痛学韩语</div>
+  </div>
+
+  <div class="subtitle-list" id="subtitleList">
+    <!-- 从 JSON 动态加载 -->
+  </div>
+
+  <div class="bottom-bar">
+    <div class="bar-inner">
+      <div class="bar-btn-group active" id="btnBilingual">
+        <span class="bar-icon">☰</span>
+        <span class="bar-label">双语</span>
+      </div>
+      <div class="bar-btn-group" id="btnSpeedCycle">
+        <span class="bar-icon">1x</span>
+        <span class="bar-label">倍速</span>
+      </div>
+      <button class="btn-play-main" id="btnPlayMain">&#9654;</button>
+      <div class="bar-btn-group" id="btnLoop">
+        <span class="bar-icon">↻</span>
+        <span class="bar-label">循环</span>
+      </div>
+      <div class="bar-btn-group" id="btnRead">
+        <span class="bar-icon">📖</span>
+        <span class="bar-label">精读</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  // ===== 配置：在这里添加新 EP，录屏版自动出现 =====
+  var episodes = [
+    { id: 1, tab: 'EP1 职场邮件怎么写', video: 'media/ep1_video.mp4', data: 'data/ep1.json', page: 'episode1.html' },
+    { id: 2, tab: 'EP2 济州岛之旅', video: 'media/ep2_video.mp4', data: 'data/ep2.json', page: 'episode2.html' },
+    { id: 3, tab: 'EP3 瀑布广场', video: 'media/ep3_video.mp4', data: 'data/ep3.json', page: 'episode3.html' }
+    // 新增EP只需加一行，JSON里的字幕会自动加载
+  ];
+
+  var player = document.getElementById('player');
+  var subtitleList = document.getElementById('subtitleList');
+  var epTabs = document.getElementById('epTabs');
+  var btnPlay = document.getElementById('btnPlayMain');
+  var btnBilingual = document.getElementById('btnBilingual');
+  var btnSpeedCycle = document.getElementById('btnSpeedCycle');
+  var btnLoop = document.getElementById('btnLoop');
+  var btnRead = document.getElementById('btnRead');
+
+  var currentEp = 0; // index into episodes
+  var cards = [];
+  var activeCard = null;
+  var isLooping = false;
+  var showCn = true;
+  var speeds = [0.75, 1, 1.25, 1.5];
+  var speedIdx = 1;
+  var epDataCache = {};
+
+  // 生成 tabs
+  episodes.forEach(function(ep, idx) {
+    var tab = document.createElement('div');
+    tab.className = 'ep-tab' + (idx === 0 ? ' active' : '');
+    tab.textContent = ep.tab;
+    tab.addEventListener('click', function() { switchEp(idx); });
+    epTabs.appendChild(tab);
+  });
+
+  // 格式化时间 0:01
+  function fmtTime(sec) {
+    var m = Math.floor(sec / 60);
+    var s = Math.floor(sec % 60);
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  // 从 JSON 加载字幕并渲染
+  function loadEp(idx, cb) {
+    if (epDataCache[idx]) { cb(epDataCache[idx]); return; }
+    fetch(episodes[idx].data + '?t=' + Date.now())
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        epDataCache[idx] = data;
+        cb(data);
+      });
+  }
+
+  function renderSubtitles(data) {
+    subtitleList.innerHTML = '';
+    cards = [];
+    activeCard = null;
+    data.subtitles.forEach(function(sub) {
+      var card = document.createElement('div');
+      card.className = 'sub-card';
+      card.dataset.start = sub.start;
+      card.dataset.end = sub.end;
+      card.innerHTML =
+        '<div class="sub-time">' + fmtTime(sub.start) + '</div>' +
+        '<div class="sub-kr">' + sub.kr + '</div>' +
+        '<div class="sub-cn"' + (showCn ? '' : ' style="display:none"') + '>' + sub.cn + '</div>';
+      card.addEventListener('click', function() {
+        player.currentTime = parseFloat(card.dataset.start);
+        if (player.paused) player.play();
+      });
+      subtitleList.appendChild(card);
+      cards.push(card);
+    });
+  }
+
+  function switchEp(idx) {
+    if (idx === currentEp && cards.length > 0) return;
+    player.pause();
+    currentEp = idx;
+
+    // 更新 tab 样式
+    var tabs = epTabs.querySelectorAll('.ep-tab');
+    tabs.forEach(function(t, i) { t.classList.toggle('active', i === idx); });
+
+    // 切换视频
+    player.src = episodes[idx].video;
+
+    // 加载字幕
+    loadEp(idx, function(data) {
+      renderSubtitles(data);
+    });
+
+    updatePlayBtn();
+  }
+
+  function updatePlayBtn() {
+    btnPlay.innerHTML = player.paused ? '&#9654;' : '&#9646;&#9646;';
+  }
+
+  // 视频时间更新 → 高亮当前字幕
+  player.addEventListener('timeupdate', function() {
+    var t = player.currentTime;
+    var found = null;
+    for (var i = 0; i < cards.length; i++) {
+      var s = parseFloat(cards[i].dataset.start);
+      var e = parseFloat(cards[i].dataset.end);
+      if (t >= s && t < e) { found = cards[i]; break; }
+    }
+
+    if (found !== activeCard) {
+      if (activeCard) activeCard.classList.remove('active');
+      activeCard = found;
+      if (activeCard) {
+        activeCard.classList.add('active');
+        var cardTop = activeCard.offsetTop - subtitleList.offsetTop;
+        var targetScroll = cardTop - subtitleList.clientHeight * 0.2;
+        subtitleList.scrollTo({ top: Math.max(0, targetScroll), behavior: 'smooth' });
+      }
+    }
+
+    if (isLooping && activeCard) {
+      var e2 = parseFloat(activeCard.dataset.end);
+      var s2 = parseFloat(activeCard.dataset.start);
+      if (player.currentTime >= e2) player.currentTime = s2;
+    }
+  });
+
+  player.addEventListener('play', updatePlayBtn);
+  player.addEventListener('pause', updatePlayBtn);
+  player.addEventListener('ended', function() {
+    player.currentTime = 0;
+    updatePlayBtn();
+  });
+
+  btnPlay.addEventListener('click', function() {
+    if (player.paused) player.play();
+    else player.pause();
+  });
+
+  btnBilingual.addEventListener('click', function() {
+    showCn = !showCn;
+    btnBilingual.classList.toggle('active', showCn);
+    document.querySelectorAll('.sub-cn').forEach(function(el) {
+      el.style.display = showCn ? '' : 'none';
+    });
+  });
+
+  btnSpeedCycle.addEventListener('click', function() {
+    speedIdx = (speedIdx + 1) % speeds.length;
+    player.playbackRate = speeds[speedIdx];
+    btnSpeedCycle.querySelector('.bar-icon').textContent = speeds[speedIdx] + 'x';
+    btnSpeedCycle.classList.toggle('active', speeds[speedIdx] !== 1);
+  });
+
+  btnLoop.addEventListener('click', function() {
+    isLooping = !isLooping;
+    btnLoop.classList.toggle('active', isLooping);
+  });
+
+  btnRead.addEventListener('click', function() {
+    window.location.href = episodes[currentEp].page;
+  });
+
+  // 初始加载第一集
+  switchEp(0);
+})();
+</script>
+</body>
+</html>
