@@ -8,17 +8,16 @@
   body { font-family: sans-serif; max-width: 900px; margin: 20px auto; padding: 0 20px; background: #f5f5f5; }
   h2 { margin: 20px 0 10px; }
   .tabs { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
-  .tabs button { padding: 8px 20px; border: 1px solid #ccc; background: #fff; border-radius: 6px; cursor: pointer; font-size: 14px; }
+  .tabs button { padding: 8px 20px; border: 1px solid #ccc; background: #fff; border-radius: 6px; cursor: pointer; font-size: 14px; position: relative; }
   .tabs button.active { background: #8B2252; color: #fff; border-color: #8B2252; }
+  .tabs button .badge { position: absolute; top: -6px; right: -6px; background: #4CAF50; color: #fff; font-size: 10px; padding: 1px 5px; border-radius: 8px; }
+  .tabs button .badge.partial { background: #FF9800; }
   video { width: 100%; border-radius: 8px; background: #000; }
   .instructions { background: #fff3cd; padding: 12px; border-radius: 8px; margin: 10px 0; font-size: 14px; line-height: 1.6; }
   .instructions b { color: #8B2252; }
   .btn-row { display: flex; gap: 8px; margin: 10px 0; flex-wrap: wrap; }
   .btn-row button { padding: 8px 16px; border-radius: 6px; border: 1px solid #ccc; background: #fff; cursor: pointer; font-size: 13px; }
   .btn-row button:hover { background: #f0f0f0; }
-  .btn-export { background: #4CAF50 !important; color: #fff !important; border-color: #4CAF50 !important; font-weight: bold; }
-  .btn-export:hover { background: #45a049 !important; }
-  .btn-export:disabled { background: #ccc !important; border-color: #ccc !important; cursor: not-allowed; }
   #counter { font-size: 18px; font-weight: bold; color: #8B2252; margin: 10px 0; }
 
   .sentence-list { margin: 10px 0; }
@@ -36,12 +35,8 @@
   .sent-kr { font-weight: 500; }
   .sent-cn { color: #888; font-size: 12px; }
 
-  #jsonOutput {
-    background: #1e1e1e; color: #d4d4d4; border-radius: 8px; padding: 16px;
-    margin: 10px 0; font-family: monospace; font-size: 12px; white-space: pre-wrap;
-    max-height: 300px; overflow-y: auto; display: none;
-  }
   .status-bar { background: #e8f5e9; padding: 10px 14px; border-radius: 8px; margin: 10px 0; font-size: 14px; color: #2e7d32; display: none; }
+  .status-bar.warn { background: #fff3cd; color: #856404; }
 </style>
 </head>
 <body>
@@ -52,8 +47,7 @@
     2. 点击播放视频<br>
     3. 每当一句新字幕开始时，按 <b>空格键</b> 打点（自动匹配到下一句）<br>
     4. 按 <b>Z 键</b> 撤销上一个打点<br>
-    5. 打完后点 <b>"导出JSON并下载"</b>，把文件放到 <code>data/</code> 目录覆盖即可<br>
-    <b>录屏版会自动读取最新 JSON，无需其他操作！</b>
+    5. 进度自动保存到浏览器本地，<b>刷新页面或关闭浏览器都不会丢失</b>
   </div>
 
   <div class="tabs" id="epTabs"></div>
@@ -67,17 +61,14 @@
   <div class="btn-row">
     <button onclick="markTime()">打点 (空格)</button>
     <button onclick="undoLast()">撤销 (Z)</button>
-    <button onclick="clearAll()">清空</button>
-    <button class="btn-export" id="btnExport" onclick="exportJson()" disabled>导出JSON并下载</button>
+    <button onclick="clearAll()">清空本EP</button>
   </div>
 
   <div class="sentence-list" id="sentenceList"></div>
   <div class="status-bar" id="statusBar"></div>
-  <div id="jsonOutput"></div>
 
   <script>
     // ===== EP 配置 =====
-    // 每个 EP 的字幕文本在这里配置，打点工具会自动匹配
     var epConfig = {
       1: {
         title: 'EP1 职场邮件怎么写',
@@ -132,6 +123,65 @@
     var player = document.getElementById('player');
     var marks = [];
     var currentEp = 1;
+    var STORAGE_KEY = 'timestamp_tool_marks';
+
+    // ===== localStorage 持久化 =====
+    function loadAllMarks() {
+      try {
+        var saved = localStorage.getItem(STORAGE_KEY);
+        return saved ? JSON.parse(saved) : {};
+      } catch (e) { return {}; }
+    }
+
+    function saveMarks() {
+      var all = loadAllMarks();
+      all[currentEp] = marks;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+      updateTabBadges();
+      showAutoSaveHint();
+    }
+
+    function loadMarksForEp(ep) {
+      var all = loadAllMarks();
+      return all[ep] || [];
+    }
+
+    function clearMarksForEp(ep) {
+      var all = loadAllMarks();
+      delete all[ep];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+      updateTabBadges();
+    }
+
+    // ===== 自动保存提示 =====
+    var saveHintTimer = null;
+    function showAutoSaveHint() {
+      var bar = document.getElementById('statusBar');
+      bar.className = 'status-bar';
+      bar.innerHTML = '已自动保存 (' + new Date().toLocaleTimeString() + ')';
+      bar.style.display = 'block';
+      clearTimeout(saveHintTimer);
+      saveHintTimer = setTimeout(function() { bar.style.display = 'none'; }, 2000);
+    }
+
+    // ===== Tab 徽标 =====
+    function updateTabBadges() {
+      var all = loadAllMarks();
+      var buttons = document.getElementById('epTabs').querySelectorAll('button');
+      buttons.forEach(function(btn, i) {
+        var ep = i + 1;
+        var saved = all[ep] || [];
+        var total = epConfig[ep].sentences.length;
+        var existing = btn.querySelector('.badge');
+        if (existing) existing.remove();
+        if (saved.length > 0) {
+          var badge = document.createElement('span');
+          badge.className = saved.length >= total ? 'badge' : 'badge partial';
+          badge.textContent = saved.length + '/' + total;
+          btn.appendChild(badge);
+        }
+      });
+    }
 
     // 动态生成 tabs
     var tabsEl = document.getElementById('epTabs');
@@ -139,7 +189,15 @@
       var btn = document.createElement('button');
       btn.textContent = epConfig[epId].title;
       btn.className = parseInt(epId) === 1 ? 'active' : '';
-      btn.addEventListener('click', function() { switchEp(parseInt(epId)); });
+      btn.addEventListener('click', function() {
+        var targetEp = parseInt(epId);
+        if (targetEp === currentEp) return;
+        var sents = epConfig[currentEp].sentences;
+        if (marks.length > 0 && marks.length < sents.length) {
+          if (!confirm('EP' + currentEp + ' 还有 ' + (sents.length - marks.length) + ' 句未打点，确定切换吗？\n（进度已自动保存，切回来可继续）')) return;
+        }
+        switchEp(targetEp);
+      });
       tabsEl.appendChild(btn);
     });
 
@@ -151,7 +209,7 @@
       player.pause();
       document.getElementById('videoSrc').src = epConfig[ep].video;
       player.load();
-      marks = [];
+      marks = loadMarksForEp(ep);
       render();
     }
 
@@ -163,21 +221,26 @@
 
     function markTime() {
       var sents = epConfig[currentEp].sentences;
-      if (marks.length >= sents.length) return; // 已打完
+      if (marks.length >= sents.length) return;
       marks.push(player.currentTime);
+      saveMarks();
       render();
-      // 自动滚动到当前句
       var currentRow = document.querySelector('.sent-row.current');
       if (currentRow) currentRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     function undoLast() {
+      if (marks.length === 0) return;
       marks.pop();
+      saveMarks();
       render();
     }
 
     function clearAll() {
+      if (marks.length === 0) return;
+      if (!confirm('确定清空 EP' + currentEp + ' 的所有打点数据吗？')) return;
       marks = [];
+      clearMarksForEp(currentEp);
       render();
     }
 
@@ -186,8 +249,7 @@
       var total = sents.length;
       var done = marks.length;
 
-      document.getElementById('counter').textContent = '已打 ' + done + ' / ' + total + ' 个点';
-      document.getElementById('btnExport').disabled = (done < total);
+      document.getElementById('counter').textContent = '已打 ' + done + ' / ' + total + ' 个点' + (done >= total ? ' ✅ 已完成' : '');
 
       var html = '';
       for (var i = 0; i < total; i++) {
@@ -211,52 +273,6 @@
           '<div class="sent-cn">' + sents[i].cn + '</div></div></div>';
       }
       document.getElementById('sentenceList').innerHTML = html;
-
-      // 隐藏之前的导出结果
-      document.getElementById('jsonOutput').style.display = 'none';
-      document.getElementById('statusBar').style.display = 'none';
-    }
-
-    function buildJson() {
-      var sents = epConfig[currentEp].sentences;
-      var subtitles = [];
-      for (var i = 0; i < sents.length; i++) {
-        var start = parseFloat(marks[i].toFixed(1));
-        var end = (i < sents.length - 1) ? parseFloat(marks[i + 1].toFixed(1)) : parseFloat((marks[i] + 10).toFixed(1));
-        subtitles.push({
-          start: start,
-          end: end,
-          kr: sents[i].kr,
-          cn: sents[i].cn
-        });
-      }
-      return {
-        title: epConfig[currentEp].title,
-        subtitles: subtitles
-      };
-    }
-
-    function exportJson() {
-      var data = buildJson();
-      var jsonStr = JSON.stringify(data, null, 2);
-      var filename = epConfig[currentEp].file;
-
-      // 下载文件
-      var blob = new Blob([jsonStr], { type: 'application/json' });
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      a.click();
-      URL.revokeObjectURL(url);
-
-      // 显示结果
-      document.getElementById('jsonOutput').textContent = jsonStr;
-      document.getElementById('jsonOutput').style.display = 'block';
-
-      var statusBar = document.getElementById('statusBar');
-      statusBar.innerHTML = '✅ 已下载 <b>' + filename + '</b>，把它放到 <code>data/</code> 目录覆盖同名文件，录屏版刷新即生效！';
-      statusBar.style.display = 'block';
     }
 
     // Keyboard shortcuts
@@ -272,6 +288,7 @@
 
     // 初始渲染
     switchEp(1);
+    updateTabBadges();
   </script>
 </body>
 </html>
