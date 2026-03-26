@@ -68,9 +68,9 @@
   <div id="lockedBanner" class="locked-banner" style="display:none;">
     <div>
       <div class="locked-text">已完成打点</div>
-      <div class="locked-sub">数据已锁定，如需修改请点击右侧按钮</div>
+      <div class="locked-sub">数据已锁定，解锁后可撤销/调整，不影响其他EP</div>
     </div>
-    <button class="btn-reopen" onclick="unlockEp()">重新打点</button>
+    <button class="btn-reopen" onclick="unlockEp()">解锁编辑</button>
   </div>
 
   <div class="btn-row" id="editButtons">
@@ -236,9 +236,7 @@
     }
 
     function unlockEp() {
-      if (!confirm('确定要清空 EP' + currentEp + ' 的打点数据并重新打点吗？')) return;
-      marks = [];
-      clearMarksForEp(currentEp);
+      if (!confirm('确定要解锁 EP' + currentEp + ' 进行编辑吗？\n（数据不会清空，可以撤销/调整）')) return;
       locked = false;
       updateLockUI();
       render();
