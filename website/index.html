@@ -349,7 +349,7 @@
     <h1>养成地道韩语大脑</h1>
     <p class="desc">跟着<strong>韩国母语博主</strong>，用<span class="hl">六步学习法</span>练出地道韩语口语</p>
     <a href="#lessons" class="hero-btn">六步学习法 · 听说读练</a>
-    <p class="hero-meta">已有 <strong>5</strong> 期内容 · 覆盖职场 / 旅行 / 美食等话题</p>
+    <p class="hero-meta">已有 <strong>9</strong> 期内容 · 覆盖职场 / 旅行 / 美食等话题</p>
   </section>
 
   <!-- Filter Panel -->
@@ -501,8 +501,17 @@
   <script>
     var lessons = [
       {
-        number: '01', icon: '✈️', page: 'episode2.html',
+        number: '01', icon: '📧', page: 'episode1.html',
         thumbBg: '#E8EFFF',
+        difficulty: 4,
+        tags: [{ label: '职场', color: 'blue' }, { label: '노말이', color: 'pink' }],
+        title: '职场邮件怎么写？',
+        desc: '학습 요청 메일을 효과적으로 쓰는 5가지 팁',
+        vocab: ['요청 请求', '걸다 挂/提交', '다면 如果']
+      },
+      {
+        number: '02', icon: '✈️', page: 'episode2.html',
+        thumbBg: '#ECFDF5',
         difficulty: 2,
         tags: [{ label: '旅行', color: 'green' }, { label: '월간한국', color: 'blue' }],
         title: '月刊韩国·济州岛之旅',
@@ -510,40 +519,67 @@
         vocab: ['여행 旅行', '비행기 飞机', '제주도 济州岛']
       },
       {
-        number: '02', icon: '🐷', page: 'episode3.html',
-        thumbBg: '#ECFDF5',
+        number: '03', icon: '🐷', page: 'episode3.html',
+        thumbBg: '#FFF1F2',
         difficulty: 3,
         tags: [{ label: '美食', color: 'orange' }, { label: 'Didi의 한국문화 Podcast', color: 'green' }],
-        title: '济州岛美食中的黑猪烤肉',
-        desc: '제주도 흑돼지 맛집 추천과 한국 바베큐 문화',
-        vocab: ['흑돼지 黑猪', '맛집 美食店', '굽다 烤']
+        title: '济州岛暴风雪中的黑猪烤肉',
+        desc: '제주도 눈보라 속 흑돼지구이',
+        vocab: ['눈보라 暴风雪', '맛집 美食店', '흑돼지구이 黑猪烤肉']
       },
       {
-        number: '03', icon: '🎁', page: 'episode4.html',
-        thumbBg: '#FFF1F2',
+        number: '04', icon: '🎁', page: 'episode4.html',
+        thumbBg: '#F3F0FF',
         difficulty: 1,
-        tags: [{ label: '学习', color: 'blue' }, { label: 'Didi의 한국문화 Podcast', color: 'green' }],
+        tags: [{ label: '旅游', color: 'green' }, { label: 'Didi의 한국문화 Podcast', color: 'green' }],
         title: '济州岛纪念品店',
-        desc: '제주도 기념품 쇼핑 가이드와 추천 아이템',
-        vocab: ['기념품 纪念品', '선물 礼物', '가게 商店']
+        desc: '제주도 기념품 샵 구경',
+        vocab: ['기념품 纪念品', '돌하르방 石头爷爷', '현무암 玄武岩']
       },
       {
-        number: '04', icon: '🏪', page: '#',
+        number: '05', icon: '☕', page: 'episode5.html',
+        thumbBg: '#FFF8EE',
+        difficulty: 3,
+        tags: [{ label: '文化', color: 'pink' }, { label: 'Didi의 한국문화 Podcast', color: 'green' }],
+        title: '济州岛咖啡馆探店',
+        desc: '제주도 카페 탐방',
+        vocab: ['시켜보다 点来试试', '찍다 蘸', '시그니처 招牌款']
+      },
+      {
+        number: '06', icon: '🦐', page: 'episode6.html',
+        thumbBg: '#FFF1F2',
+        difficulty: 2,
+        tags: [{ label: '美食', color: 'orange' }, { label: 'Didi의 한국문화 Podcast', color: 'green' }],
+        title: '韩国国民零食——虾条',
+        desc: '한국 국민 과자 새우깡',
+        vocab: ['새우깡 虾条', '국민 과자 国民零食', '안주 下酒菜']
+      },
+      {
+        number: '07', icon: '🤢', page: 'episode7.html',
+        thumbBg: '#E8EFFF',
+        difficulty: 2,
+        tags: [{ label: '旅行', color: 'green' }, { label: '러비한비LOVEYHANBI', color: 'pink' }],
+        title: '晕车与美食',
+        desc: '멀미와 맛집 탐방',
+        vocab: ['멀미 晕车', '울렁거리다 反胃', '라볶이 拉面炒年糕']
+      },
+      {
+        number: '08', icon: '📝', page: 'episode8.html',
+        thumbBg: '#ECFDF5',
+        difficulty: 3,
+        tags: [{ label: '感悟', color: 'orange' }, { label: '시골쥐의 도시생활', color: 'blue' }],
+        title: '便利贴掌控潜意识',
+        desc: '메모로 무의식을 지배하기',
+        vocab: ['미루다 拖延', '무의식 潜意识', '해치우다 搞定']
+      },
+      {
+        number: '09', icon: '😰', page: 'episode9.html',
         thumbBg: '#F3F0FF',
         difficulty: 3,
-        tags: [{ label: '文化', color: 'pink' }, { label: '월간한국', color: 'blue' }],
-        title: '韩国传统市场探访',
-        desc: '전통시장에서 즐기는 한국 문화 체험',
-        vocab: ['시장 市场', '전통 传统', '체험 体验']
-      },
-      {
-        number: '05', icon: '📧', page: 'episode1.html',
-        thumbBg: '#E8EFFF',
-        difficulty: 4,
-        tags: [{ label: '职场', color: 'blue' }, { label: '노말이', color: 'pink' }],
-        title: '职场邮件怎么写？',
-        desc: '학습 요청 메일을 효과적으로 쓰는 5가지 팁',
-        vocab: ['요청 请求', '걸다 挂/提交', '다면 如果']
+        tags: [{ label: '感悟', color: 'pink' }, { label: '유어셀린 YourCeline', color: 'blue' }],
+        title: '上课怕被抽到',
+        desc: '발표 공포증 극복기',
+        vocab: ['발표하다 发言', '식은땀 冷汗', '공포 恐惧']
       }
     ];
 
