@@ -44,7 +44,7 @@
 
     /* ===== Hero ===== */
     .hero {
-      background: linear-gradient(180deg, #EEF0FF 0%, #F7F8FC 100%);
+      background: linear-gradient(180deg, #FFF8EE 0%, #F7F8FC 100%);
       padding: 48px 20px 36px; text-align: center;
     }
     .hero-sub {
@@ -95,13 +95,18 @@
       gap: 12px; margin-bottom: 28px;
     }
     .diff-card {
-      background: #F0F2FF; border-radius: 14px;
+      border-radius: 14px;
       padding: 24px 16px 20px; text-align: center;
       cursor: pointer; border: 2px solid transparent;
       transition: all 0.2s;
     }
+    .diff-card[data-level="1"] { background: #EEF2F7; }
+    .diff-card[data-level="2"] { background: #EEF2F7; }
+    .diff-card[data-level="3"] { background: #E8EEFF; }
+    .diff-card[data-level="4"] { background: #FFF0F0; }
+    .diff-card[data-level="5"] { background: #FFF0F0; }
     .diff-card:hover { border-color: var(--primary); }
-    .diff-card.active { border-color: var(--primary); background: #E8EBFF; }
+    .diff-card.active { border-color: var(--primary); filter: brightness(0.96); }
     .diff-icon { font-size: 2.2rem; margin-bottom: 10px; display: block; }
     .diff-name { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
     .diff-desc { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; }
@@ -137,8 +142,8 @@
     }
     .tag-btn:hover { border-color: var(--primary); color: var(--primary); }
     .tag-btn.active {
-      background: var(--primary); color: white;
-      border-color: var(--primary);
+      background: #059669; color: white;
+      border-color: #059669;
     }
 
     /* ===== Content Header ===== */
