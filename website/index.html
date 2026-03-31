@@ -237,21 +237,34 @@
     .lesson-list { display: flex; flex-direction: column; gap: 10px; }
     .lesson-card-list {
       background: var(--card); border-radius: 14px;
-      border: 1px solid #EEEEF0;
-      display: flex; align-items: center; gap: 16px;
-      padding: 14px 20px; transition: all 0.2s;
+      border: 1px solid #D6DEFF;
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 18px 24px; transition: all 0.2s;
       box-shadow: var(--shadow);
     }
     .lesson-card-list:hover { box-shadow: var(--shadow-md); }
     .list-icon {
-      width: 48px; height: 48px; border-radius: 12px;
+      width: 56px; height: 56px; border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem; flex-shrink: 0;
+      font-size: 1.8rem; flex-shrink: 0; margin-top: 2px;
     }
     .list-body { flex: 1; min-width: 0; }
-    .list-body h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 2px; }
-    .list-body .card-desc { font-size: 0.78rem; color: var(--text-muted); margin: 0; }
-    .list-number { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); flex-shrink: 0; }
+    .list-title-row { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+    .list-title-row h3 { font-size: 0.95rem; font-weight: 700; }
+    .list-title-row .list-stars { display: flex; gap: 1px; }
+    .list-title-row .card-star { font-size: 0.7rem; }
+    .list-body .list-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px; }
+    .list-meta-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .list-meta-row .card-tag { font-size: 0.68rem; }
+    .list-meta-divider {
+      width: 1px; height: 14px; background: #D1D5DB; flex-shrink: 0;
+    }
+    .list-meta-row .list-vocab { display: flex; gap: 10px; }
+    .list-meta-row .list-vocab span { font-size: 0.75rem; color: #4338CA; font-weight: 500; }
+    .list-number {
+      font-size: 0.9rem; font-weight: 600; color: #D1D5DB;
+      flex-shrink: 0; margin-top: 4px;
+    }
 
     /* ===== Tools ===== */
     .tools-section {
@@ -577,13 +590,28 @@
 
     function renderList(items) {
       return items.map(function(l) {
+        var tags = l.tags.map(function(t) {
+          return '<span class="card-tag card-tag-' + t.color + '">' + t.label + '</span>';
+        }).join('');
+        var vocabs = l.vocab.map(function(v) {
+          return '<span>' + v + '</span>';
+        }).join('');
+
         return '<a href="' + l.page + '" class="lesson-card-list">' +
           '<div class="list-icon" style="background:' + l.thumbBg + '">' + l.icon + '</div>' +
           '<div class="list-body">' +
-            '<h3>' + l.title + '</h3>' +
-            '<p class="card-desc">' + l.desc + '</p>' +
+            '<div class="list-title-row">' +
+              '<h3>' + l.title + '</h3>' +
+              '<div class="list-stars">' + starsHTML(l.difficulty, 4) + '</div>' +
+            '</div>' +
+            '<p class="list-desc">' + l.desc + '</p>' +
+            '<div class="list-meta-row">' +
+              tags +
+              '<span class="list-meta-divider"></span>' +
+              '<div class="list-vocab">' + vocabs + '</div>' +
+            '</div>' +
           '</div>' +
-          '<span class="list-number">EP' + l.number + '</span>' +
+          '<span class="list-number">' + l.number + '</span>' +
         '</a>';
       }).join('');
     }
