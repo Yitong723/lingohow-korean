@@ -353,7 +353,7 @@
     var tabsEl = document.getElementById('epTabs');
     Object.keys(epConfig).forEach(function(epId) {
       var btn = document.createElement('button');
-      btn.textContent = epConfig[epId].title;
+      btn.textContent = 'EP' + epId;
       btn.className = parseInt(epId) === 1 ? 'active' : '';
       btn.addEventListener('click', function() {
         var targetEp = parseInt(epId);
