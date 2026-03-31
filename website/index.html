@@ -4,30 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>养成地道韩语大脑</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;800&family=Noto+Sans+SC:wght@300;400;500;700;800&display=swap">
   <style>
     :root {
-      --bg: #FAFBFD;
+      --bg: #F7F8FC;
       --card: #FFFFFF;
       --text: #1a1a2e;
-      --text-light: #6B7280;
+      --text-secondary: #4B5563;
       --text-muted: #9CA3AF;
       --border: #E5E7EB;
-      --border-light: rgba(229,231,235,0.5);
-      --primary: #1B3A6B;
-      --primary-light: rgba(27,58,107,0.08);
+      --primary: #4F46E5;
+      --primary-light: #EEF2FF;
       --radius: 16px;
-      --shadow: 0 1px 3px rgba(0,0,0,0.06);
-      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow: 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      font-family: 'Noto Sans SC', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -35,149 +32,176 @@
 
     /* ===== Nav ===== */
     .nav {
+      background: white; border-bottom: 1px solid #EEEEF0;
       position: sticky; top: 0; z-index: 50;
-      background: rgba(250,251,253,0.8);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-light);
     }
     .nav-inner {
-      max-width: 1280px; margin: 0 auto; padding: 0 20px;
-      height: 56px; display: flex; align-items: center; gap: 10px;
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      height: 52px; display: flex; align-items: center; gap: 10px;
     }
-    .nav-flag { font-size: 20px; }
-    .nav-title { font-weight: 700; font-size: 16px; color: var(--text); }
+    .nav-flag { font-size: 18px; }
+    .nav-title { font-weight: 700; font-size: 15px; color: var(--text); }
 
     /* ===== Hero ===== */
     .hero {
-      max-width: 1280px; margin: 0 auto; padding: 48px 20px 32px;
-      text-align: center;
+      background: linear-gradient(180deg, #EEF0FF 0%, #F7F8FC 100%);
+      padding: 48px 20px 36px; text-align: center;
     }
-    .hero h1 {
-      font-size: 2rem; font-weight: 800; color: var(--text);
+    .hero-sub {
+      font-size: 0.9rem; color: var(--primary); letter-spacing: 2px;
       margin-bottom: 12px;
     }
-    .hero .subtitle {
-      font-size: 1.05rem; color: var(--text-light);
+    .hero h1 {
+      font-size: 2.2rem; font-weight: 800; color: var(--text);
       margin-bottom: 16px;
     }
-    .hero .method-tag {
-      display: inline-block;
-      padding: 6px 16px; border-radius: 20px;
-      background: var(--primary-light);
-      color: var(--primary); font-size: 0.85rem; font-weight: 500;
+    .hero .desc {
+      font-size: 1rem; color: var(--text-secondary); margin-bottom: 24px;
     }
+    .hero .desc strong { color: var(--text); font-weight: 700; }
+    .hero .desc .hl { color: var(--primary); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+    .hero-btn {
+      display: inline-block;
+      padding: 14px 40px; border-radius: 28px;
+      background: var(--primary); color: white;
+      font-size: 1rem; font-weight: 600;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 16px rgba(79,70,229,0.3);
+      margin-bottom: 20px;
+    }
+    .hero-meta {
+      font-size: 0.82rem; color: var(--text-muted);
+    }
+    .hero-meta strong { color: var(--text-secondary); font-weight: 700; }
 
     /* ===== Filter Panel ===== */
     .filter-panel {
-      max-width: 1280px; margin: 0 auto 32px; padding: 0 20px;
+      max-width: 1200px; margin: -8px auto 0; padding: 0 24px;
     }
     .filter-box {
-      background: var(--card); border-radius: var(--radius);
-      border: 1px solid var(--border-light);
-      padding: 24px; box-shadow: var(--shadow);
+      background: var(--card); border-radius: 20px;
+      border: 1px solid #EEEEF0;
+      padding: 28px 32px; box-shadow: var(--shadow);
     }
-    .filter-section-title {
-      font-size: 0.8rem; font-weight: 700; color: var(--text-muted);
-      margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;
-    }
-    .filter-divider {
-      border: none; border-top: 1px solid rgba(229,231,235,0.3);
-      margin: 20px 0;
+    .filter-title {
+      font-size: 1rem; font-weight: 700; color: var(--text);
+      margin-bottom: 16px;
     }
 
-    /* Difficulty selector */
-    .difficulty-row {
+    /* Difficulty cards */
+    .diff-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px; margin-bottom: 28px;
+    }
+    .diff-card {
+      background: #F0F2FF; border-radius: 14px;
+      padding: 20px 12px 16px; text-align: center;
+      cursor: pointer; border: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .diff-card:hover { border-color: var(--primary); }
+    .diff-card.active { border-color: var(--primary); background: #E8EBFF; }
+    .diff-icon { font-size: 2rem; margin-bottom: 8px; display: block; }
+    .diff-name { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .diff-desc { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 8px; }
+    .diff-topik {
+      display: inline-block; font-size: 0.68rem; font-weight: 600;
+      padding: 2px 8px; border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .diff-topik-1 { background: #ECFDF5; color: #059669; }
+    .diff-topik-2 { background: #ECFDF5; color: #059669; }
+    .diff-topik-3 { background: #FFF7ED; color: #EA580C; }
+    .diff-topik-4 { background: #FFF7ED; color: #EA580C; }
+    .diff-topik-5 { background: #FFF7ED; color: #EA580C; }
+    .diff-stars { display: flex; justify-content: center; gap: 3px; }
+    .diff-star { font-size: 0.8rem; }
+    .diff-star.filled { color: var(--primary); }
+    .diff-star.empty { color: #D1D5DB; }
+
+    /* Topic tags */
+    .topic-title {
+      font-size: 1rem; font-weight: 700; color: var(--text);
+      margin-bottom: 12px;
+    }
+    .tag-row {
       display: flex; gap: 8px; flex-wrap: wrap;
     }
-    .diff-btn {
-      display: flex; align-items: center; gap: 6px;
-      padding: 8px 14px; border-radius: 10px;
-      border: 1px solid var(--border); background: var(--card);
-      cursor: pointer; font-size: 0.85rem; color: var(--text-light);
-      transition: all 0.2s;
-    }
-    .diff-btn:hover { background: var(--primary-light); color: var(--primary); border-color: var(--primary); }
-    .diff-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
-    .diff-dots { display: flex; gap: 3px; }
-    .diff-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: currentColor; opacity: 0.6;
-    }
-    .diff-btn.active .diff-dot { opacity: 1; background: white; }
-
-    /* Tag buttons */
-    .tag-row {
-      display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px;
-    }
-    .tag-row::-webkit-scrollbar { display: none; }
     .tag-btn {
-      padding: 6px 16px; border-radius: 20px;
-      border: none; cursor: pointer;
-      font-size: 0.85rem; font-weight: 500; white-space: nowrap;
-      background: #F3F4F6; color: var(--text-light);
+      padding: 7px 18px; border-radius: 20px;
+      border: 1.5px solid var(--border);
+      cursor: pointer; font-size: 0.85rem; font-weight: 500;
+      background: white; color: var(--text-secondary);
       transition: all 0.2s;
     }
-    .tag-btn:hover { background: var(--primary-light); color: var(--primary); }
-    .tag-btn.active { background: var(--primary); color: white; box-shadow: var(--shadow); }
+    .tag-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .tag-btn.active {
+      background: var(--primary); color: white;
+      border-color: var(--primary);
+    }
 
-    /* ===== View Toggle + Count ===== */
+    /* ===== Content Header ===== */
     .content-area {
-      max-width: 1280px; margin: 0 auto; padding: 0 20px 40px;
+      max-width: 1200px; margin: 0 auto; padding: 24px 24px 48px;
     }
     .content-header {
       display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
-    .content-count { font-size: 0.85rem; color: var(--text-muted); }
+    .content-count { font-size: 0.9rem; color: var(--text-secondary); }
+    .content-count strong { font-weight: 700; }
     .view-toggle {
-      display: flex; align-items: center; gap: 4px;
-      background: #F3F4F6; border-radius: 8px; padding: 4px;
+      display: flex; align-items: center; gap: 2px;
+      background: #F3F4F6; border-radius: 8px; padding: 3px;
     }
     .view-btn {
       padding: 6px 8px; border-radius: 6px;
       border: none; cursor: pointer; background: transparent;
-      color: var(--text-muted); transition: all 0.2s;
-      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); transition: all 0.15s;
+      display: flex; align-items: center;
     }
-    .view-btn.active { background: var(--card); color: var(--primary); box-shadow: var(--shadow); }
+    .view-btn.active { background: white; color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
     .view-btn svg { width: 16px; height: 16px; }
 
     /* ===== Lesson Cards - Grid ===== */
     .lesson-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
     }
     .lesson-card {
       background: var(--card); border-radius: var(--radius);
-      border: 1px solid var(--border-light);
       overflow: hidden; transition: all 0.25s;
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow); border: 1px solid #EEEEF0;
     }
     .lesson-card:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
+      box-shadow: var(--shadow-md); transform: translateY(-2px);
     }
-    .card-thumb {
-      position: relative; padding: 20px;
-      min-height: 100px; display: flex; align-items: flex-start; justify-content: space-between;
-    }
-    .card-thumb .ep-icon { font-size: 2rem; }
-    .card-thumb .ep-number {
-      font-size: 2.5rem; font-weight: 800; color: rgba(255,255,255,0.2);
-      line-height: 1; position: absolute; right: 16px; bottom: 12px;
-    }
-    .card-diff-dots {
-      display: flex; gap: 4px; align-items: center;
-    }
-    .card-diff-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: rgba(255,255,255,0.7);
-    }
-    .card-diff-dot.filled { background: white; }
 
-    .card-body { padding: 16px 20px 20px; }
-    .card-tags-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    /* Card thumbnail */
+    .card-thumb {
+      position: relative; padding: 20px 20px 16px;
+      min-height: 140px; display: flex;
+      flex-direction: column; align-items: center; justify-content: center;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+    .card-thumb .ep-icon { font-size: 4rem; margin-bottom: 4px; }
+    .card-thumb .ep-number {
+      font-size: 1rem; font-weight: 600; color: rgba(0,0,0,0.15);
+      position: absolute; right: 16px; bottom: 10px;
+    }
+    .card-stars {
+      position: absolute; top: 14px; right: 14px;
+      display: flex; gap: 2px;
+    }
+    .card-star { font-size: 0.75rem; }
+    .card-star.filled { color: var(--primary); }
+    .card-star.empty { color: #D1D5DB; }
+
+    /* Card body */
+    .card-body { padding: 14px 18px 18px; }
+    .card-tags-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
     .card-tag {
       font-size: 0.7rem; font-weight: 600; padding: 2px 8px;
       border-radius: 4px;
@@ -188,52 +212,49 @@
     .card-tag-pink { background: #FDF2F8; color: #DB2777; }
 
     .card-body h3 {
-      font-size: 1rem; font-weight: 700; margin-bottom: 4px;
-      color: var(--text);
+      font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; color: var(--text);
     }
     .card-body .card-desc {
-      font-size: 0.82rem; color: var(--text-light);
-      margin-bottom: 12px;
+      font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px;
+    }
+    .card-vocab-label {
+      font-size: 0.7rem; color: var(--text-muted); margin-bottom: 6px;
+      display: flex; align-items: center; gap: 4px;
     }
     .card-vocab { display: flex; gap: 6px; flex-wrap: wrap; }
     .card-vocab span {
       font-size: 0.7rem; padding: 3px 8px;
-      background: #F9FAFB; border: 1px solid var(--border);
-      border-radius: 6px; color: var(--text-light);
+      background: #F9FAFB; border: 1px solid #EEEEF0;
+      border-radius: 6px; color: var(--text-secondary);
     }
 
     /* ===== Lesson Cards - List ===== */
-    .lesson-list { display: flex; flex-direction: column; gap: 12px; }
+    .lesson-list { display: flex; flex-direction: column; gap: 10px; }
     .lesson-card-list {
-      background: var(--card); border-radius: var(--radius);
-      border: 1px solid var(--border-light);
+      background: var(--card); border-radius: 14px;
+      border: 1px solid #EEEEF0;
       display: flex; align-items: center; gap: 16px;
-      padding: 16px 20px; transition: all 0.25s;
+      padding: 14px 20px; transition: all 0.2s;
       box-shadow: var(--shadow);
     }
-    .lesson-card-list:hover {
-      box-shadow: var(--shadow-md);
-    }
+    .lesson-card-list:hover { box-shadow: var(--shadow-md); }
     .list-icon {
       width: 48px; height: 48px; border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       font-size: 1.5rem; flex-shrink: 0;
     }
     .list-body { flex: 1; min-width: 0; }
-    .list-body h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
-    .list-body .card-desc { font-size: 0.8rem; color: var(--text-light); margin: 0; }
-    .list-number {
-      font-size: 0.8rem; font-weight: 700; color: var(--text-muted);
-      flex-shrink: 0;
-    }
+    .list-body h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 2px; }
+    .list-body .card-desc { font-size: 0.78rem; color: var(--text-muted); margin: 0; }
+    .list-number { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); flex-shrink: 0; }
 
-    /* ===== Tools Section ===== */
+    /* ===== Tools ===== */
     .tools-section {
-      max-width: 1280px; margin: 0 auto; padding: 0 20px 40px;
+      max-width: 1200px; margin: 0 auto; padding: 0 24px 48px;
     }
-    .tools-title {
-      font-size: 0.8rem; font-weight: 700; color: var(--text-muted);
-      margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;
+    .tools-label {
+      font-size: 0.9rem; font-weight: 700; color: var(--text-secondary);
+      margin-bottom: 12px;
     }
     .tools-grid {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -241,58 +262,49 @@
     }
     .tool-card {
       background: var(--card); border-radius: 12px;
-      border: 1px solid var(--border-light);
-      padding: 16px; display: flex; align-items: center; gap: 12px;
+      border: 1px solid #EEEEF0;
+      padding: 14px 16px; display: flex; align-items: center; gap: 12px;
       transition: all 0.2s; box-shadow: var(--shadow);
     }
     .tool-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
     .tool-icon {
-      width: 40px; height: 40px; border-radius: 10px;
+      width: 38px; height: 38px; border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.1rem; color: white;
     }
-    .tool-card h4 { font-size: 0.85rem; font-weight: 600; }
-    .tool-card p { font-size: 0.72rem; color: var(--text-muted); }
+    .tool-card h4 { font-size: 0.82rem; font-weight: 600; }
+    .tool-card p { font-size: 0.7rem; color: var(--text-muted); }
 
-    /* ===== Empty State ===== */
-    .empty-state {
-      text-align: center; padding: 64px 20px; color: var(--text-muted);
-      display: none;
-    }
+    /* ===== Empty ===== */
+    .empty-state { text-align: center; padding: 64px 20px; color: var(--text-muted); display: none; }
     .empty-state.show { display: block; }
     .empty-state p:first-child { font-size: 1.1rem; }
     .empty-state p:last-child { font-size: 0.85rem; margin-top: 4px; }
 
     /* ===== Footer ===== */
-    .footer {
-      border-top: 1px solid var(--border-light);
-      background: var(--card);
-    }
-    .footer-inner {
-      max-width: 1280px; margin: 0 auto; padding: 40px 20px;
-    }
+    .footer { border-top: 1px solid #EEEEF0; background: white; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 36px 24px; }
     .footer-row {
       display: flex; flex-wrap: wrap; align-items: center;
       justify-content: space-between; gap: 16px;
     }
     .footer-brand { display: flex; align-items: center; gap: 8px; }
-    .footer-brand span:last-child { font-weight: 700; }
-    .footer-slogan { font-size: 0.85rem; color: var(--text-muted); }
+    .footer-brand span:last-child { font-weight: 700; font-size: 0.9rem; }
+    .footer-slogan { font-size: 0.82rem; color: var(--text-muted); }
     .footer-links { display: flex; gap: 16px; }
-    .footer-links a {
-      font-size: 0.85rem; color: var(--text-muted);
-      transition: color 0.2s;
-    }
+    .footer-links a { font-size: 0.82rem; color: var(--text-muted); transition: color 0.2s; }
     .footer-links a:hover { color: var(--primary); }
-    .footer-copy {
-      text-align: center; font-size: 0.72rem;
-      color: rgba(156,163,175,0.5); margin-top: 24px;
-    }
+    .footer-copy { text-align: center; font-size: 0.7rem; color: #D1D5DB; margin-top: 20px; }
 
     /* ===== Responsive ===== */
+    @media (max-width: 1024px) {
+      .lesson-grid { grid-template-columns: repeat(2, 1fr); }
+      .diff-grid { grid-template-columns: repeat(3, 1fr); }
+    }
     @media (max-width: 640px) {
-      .hero h1 { font-size: 1.5rem; }
+      .hero h1 { font-size: 1.6rem; }
       .lesson-grid { grid-template-columns: 1fr; }
+      .diff-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-row { flex-direction: column; text-align: center; }
     }
   </style>
@@ -309,76 +321,118 @@
 
   <!-- Hero -->
   <section class="hero">
+    <p class="hero-sub">한국어를 자연스럽게</p>
     <h1>养成地道韩语大脑</h1>
-    <p class="subtitle">跟着韩国母语博主，用六步学习法练出地道韩语口语</p>
-    <span class="method-tag">六步学习法 · 听说读练</span>
+    <p class="desc">跟着<strong>韩国母语博主</strong>，用<span class="hl">六步学习法</span>练出地道韩语口语</p>
+    <a href="#lessons" class="hero-btn">六步学习法 · 听说读练</a>
+    <p class="hero-meta">已有 <strong>5</strong> 期内容 · 覆盖职场 / 旅行 / 美食等话题</p>
   </section>
 
   <!-- Filter Panel -->
-  <div class="filter-panel">
+  <div class="filter-panel" id="lessons">
     <div class="filter-box">
       <!-- Difficulty -->
-      <div>
-        <div class="filter-section-title">难度选择</div>
-        <div class="difficulty-row" id="difficultyRow">
-          <button class="diff-btn" data-level="1">
-            <span class="diff-dots"><span class="diff-dot"></span></span> 入门
-          </button>
-          <button class="diff-btn" data-level="2">
-            <span class="diff-dots"><span class="diff-dot"></span><span class="diff-dot"></span></span> 基础
-          </button>
-          <button class="diff-btn" data-level="3">
-            <span class="diff-dots"><span class="diff-dot"></span><span class="diff-dot"></span><span class="diff-dot"></span></span> 进阶
-          </button>
-          <button class="diff-btn" data-level="4">
-            <span class="diff-dots"><span class="diff-dot"></span><span class="diff-dot"></span><span class="diff-dot"></span><span class="diff-dot"></span></span> 高级
-          </button>
-          <button class="diff-btn" data-level="5">
-            <span class="diff-dots"><span class="diff-dot"></span><span class="diff-dot"></span><span class="diff-dot"></span><span class="diff-dot"></span><span class="diff-dot"></span></span> 母语级
-          </button>
+      <div class="filter-title">选择难度</div>
+      <div class="diff-grid" id="diffGrid">
+        <div class="diff-card" data-level="1">
+          <span class="diff-icon">🌱</span>
+          <div class="diff-name">入门</div>
+          <div class="diff-desc">零基础也能学</div>
+          <span class="diff-topik diff-topik-1">适合TOPIK 1入门</span>
+          <div class="diff-stars">
+            <span class="diff-star filled">★</span>
+            <span class="diff-star empty">☆</span>
+            <span class="diff-star empty">☆</span>
+            <span class="diff-star empty">☆</span>
+            <span class="diff-star empty">☆</span>
+          </div>
+        </div>
+        <div class="diff-card" data-level="2">
+          <span class="diff-icon">🌿</span>
+          <div class="diff-name">基础</div>
+          <div class="diff-desc">学过发音和基本语法</div>
+          <span class="diff-topik diff-topik-2">适合TOPIK 2打基础</span>
+          <div class="diff-stars">
+            <span class="diff-star filled">★</span>
+            <span class="diff-star filled">★</span>
+            <span class="diff-star empty">☆</span>
+            <span class="diff-star empty">☆</span>
+            <span class="diff-star empty">☆</span>
+          </div>
+        </div>
+        <div class="diff-card" data-level="3">
+          <span class="diff-icon">🌺</span>
+          <div class="diff-name">进阶</div>
+          <div class="diff-desc">能进行简单日常对话</div>
+          <span class="diff-topik diff-topik-3">适合TOPIK 3达标阅读</span>
+          <div class="diff-stars">
+            <span class="diff-star filled">★</span>
+            <span class="diff-star filled">★</span>
+            <span class="diff-star filled">★</span>
+            <span class="diff-star empty">☆</span>
+            <span class="diff-star empty">☆</span>
+          </div>
+        </div>
+        <div class="diff-card" data-level="4">
+          <span class="diff-icon">🔥</span>
+          <div class="diff-name">高级</div>
+          <div class="diff-desc">可以看懂韩剧大意</div>
+          <span class="diff-topik diff-topik-4">适合TOPIK 4提升阅读</span>
+          <div class="diff-stars">
+            <span class="diff-star filled">★</span>
+            <span class="diff-star filled">★</span>
+            <span class="diff-star filled">★</span>
+            <span class="diff-star filled">★</span>
+            <span class="diff-star filled">★</span>
+          </div>
+        </div>
+        <div class="diff-card" data-level="5">
+          <span class="diff-icon">👑</span>
+          <div class="diff-name">母语级</div>
+          <div class="diff-desc">接近母语水平表达</div>
+          <span class="diff-topik diff-topik-5">适合TOPIK 5+精读</span>
+          <div class="diff-stars">
+            <span class="diff-star filled">★</span>
+            <span class="diff-star filled">★</span>
+            <span class="diff-star filled">★</span>
+            <span class="diff-star filled">★</span>
+            <span class="diff-star filled">★</span>
+          </div>
         </div>
       </div>
 
-      <hr class="filter-divider">
-
-      <!-- Tags -->
-      <div>
-        <div class="filter-section-title">话题筛选</div>
-        <div class="tag-row" id="tagRow">
-          <button class="tag-btn active" data-tag="全部">全部</button>
-          <button class="tag-btn" data-tag="旅行">旅行</button>
-          <button class="tag-btn" data-tag="美食">美食</button>
-          <button class="tag-btn" data-tag="学习">学习</button>
-          <button class="tag-btn" data-tag="文化">文化</button>
-          <button class="tag-btn" data-tag="感悟">感悟</button>
-          <button class="tag-btn" data-tag="美妆">美妆</button>
-          <button class="tag-btn" data-tag="运动">运动</button>
-          <button class="tag-btn" data-tag="职场">职场</button>
-        </div>
+      <!-- Topic tags -->
+      <div class="topic-title">话题筛选</div>
+      <div class="tag-row" id="tagRow">
+        <button class="tag-btn active" data-tag="全部">全部</button>
+        <button class="tag-btn" data-tag="旅行">旅行</button>
+        <button class="tag-btn" data-tag="美食">美食</button>
+        <button class="tag-btn" data-tag="学习">学习</button>
+        <button class="tag-btn" data-tag="文化">文化</button>
+        <button class="tag-btn" data-tag="感悟">感悟</button>
+        <button class="tag-btn" data-tag="美妆">美妆</button>
+        <button class="tag-btn" data-tag="运动">运动</button>
+        <button class="tag-btn" data-tag="职场">职场</button>
       </div>
     </div>
   </div>
 
   <!-- Content Area -->
   <div class="content-area">
-    <!-- Header -->
     <div class="content-header">
-      <p class="content-count" id="contentCount">共 9 期内容</p>
+      <p class="content-count">共 <strong id="countNum">5</strong> 期内容</p>
       <div class="view-toggle">
-        <button class="view-btn active" id="btnGrid" title="网格视图">
+        <button class="view-btn active" id="btnGrid">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         </button>
-        <button class="view-btn" id="btnList" title="列表视图">
+        <button class="view-btn" id="btnList">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
         </button>
       </div>
     </div>
 
-    <!-- Grid container -->
     <div class="lesson-grid" id="lessonGrid"></div>
-    <!-- List container -->
     <div class="lesson-list" id="lessonList" style="display:none;"></div>
-    <!-- Empty -->
     <div class="empty-state" id="emptyState">
       <p>暂无匹配的课程</p>
       <p>试试调整难度或话题筛选</p>
@@ -387,18 +441,18 @@
 
   <!-- Tools -->
   <div class="tools-section">
-    <div class="tools-title">更多工具</div>
+    <div class="tools-label">更多工具</div>
     <div class="tools-grid">
       <a href="recording.html" class="tool-card">
-        <div class="tool-icon" style="background: linear-gradient(135deg,#7C3AED,#A78BFA);">🎬</div>
+        <div class="tool-icon" style="background:linear-gradient(135deg,#7C3AED,#A78BFA);">🎬</div>
         <div><h4>韩语录屏版</h4><p>375px 录屏专用视图</p></div>
       </a>
       <a href="mobile-reading.html" class="tool-card">
-        <div class="tool-icon" style="background: linear-gradient(135deg,#DB2777,#F472B6);">📱</div>
+        <div class="tool-icon" style="background:linear-gradient(135deg,#DB2777,#F472B6);">📱</div>
         <div><h4>手机跟读版</h4><p>390px 手机跟读练习</p></div>
       </a>
       <a href="timestamp_tool.html" class="tool-card">
-        <div class="tool-icon" style="background: linear-gradient(135deg,#D97706,#FBBF24);">⏱️</div>
+        <div class="tool-icon" style="background:linear-gradient(135deg,#D97706,#FBBF24);">⏱️</div>
         <div><h4>字幕打点工具</h4><p>视频时间戳标记与导出</p></div>
       </a>
     </div>
@@ -408,10 +462,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-row">
-        <div class="footer-brand">
-          <span>🇰🇷</span>
-          <span>养成地道韩语大脑</span>
-        </div>
+        <div class="footer-brand"><span>🇰🇷</span><span>养成地道韩语大脑</span></div>
         <p class="footer-slogan">让韩语学习更有趣 · 跟着母语博主一起成长</p>
         <div class="footer-links">
           <a href="#">📕 小红书</a>
@@ -424,20 +475,10 @@
   </footer>
 
   <script>
-    // ===== Lesson Data =====
     var lessons = [
       {
-        number: '01', icon: '📧', page: 'episode1.html',
-        bg: 'linear-gradient(135deg, #1B3A6B 0%, #2A5298 100%)',
-        difficulty: 4,
-        tags: [{ label: '职场', color: 'blue' }, { label: '노말이', color: 'pink' }],
-        title: '职场邮件怎么写？',
-        desc: '학습 요청 메일을 효과적으로 쓰는 5가지 팁',
-        vocab: ['요청 请求', '걸다 挂/提交', '다면 如果', '돌리다 转动']
-      },
-      {
-        number: '02', icon: '✈️', page: 'episode2.html',
-        bg: 'linear-gradient(135deg, #0D9488 0%, #14B8A6 100%)',
+        number: '01', icon: '✈️', page: 'episode2.html',
+        thumbBg: '#E8EFFF',
         difficulty: 2,
         tags: [{ label: '旅行', color: 'green' }, { label: '월간한국', color: 'blue' }],
         title: '月刊韩国·济州岛之旅',
@@ -445,76 +486,47 @@
         vocab: ['여행 旅行', '비행기 飞机', '제주도 济州岛', '먹방 吃播']
       },
       {
-        number: '03', icon: '🥩', page: 'episode3.html',
-        bg: 'linear-gradient(135deg, #DC2626 0%, #F87171 100%)',
+        number: '02', icon: '🐷', page: 'episode3.html',
+        thumbBg: '#ECFDF5',
         difficulty: 3,
         tags: [{ label: '美食', color: 'orange' }, { label: 'Didi의 한국문화 Podcast', color: 'green' }],
-        title: '济州岛暴风雪中的黑猪烤肉',
-        desc: '제주도 눈보라 속 흑돼지구이',
-        vocab: ['눈보라 暴风雪', '관광 观光', '맛집 美食店', '흑돼지구이 黑猪烤肉']
+        title: '济州岛美食中的黑猪烤肉',
+        desc: '제주도 흑돼지 맛집 추천과 한국 바베큐 문화',
+        vocab: ['흑돼지 黑猪', '맛집 美食店', '굽다 烤', '양념 调味料']
       },
       {
-        number: '04', icon: '🎁', page: 'episode4.html',
-        bg: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%)',
+        number: '03', icon: '🎁', page: 'episode4.html',
+        thumbBg: '#FFF1F2',
         difficulty: 1,
-        tags: [{ label: '旅游', color: 'green' }, { label: 'Didi의 한국문화 Podcast', color: 'green' }],
+        tags: [{ label: '学习', color: 'blue' }, { label: 'Didi의 한국문화 Podcast', color: 'green' }],
         title: '济州岛纪念品店',
-        desc: '제주도 기념품 샵 구경',
-        vocab: ['기념품 샵 纪念品店', '돌하르방 石头爷爷', '현무암 玄武岩', '석상 石像']
+        desc: '제주도 기념품 쇼핑 가이드와 추천 아이템',
+        vocab: ['기념품 纪念品', '선물 礼物', '가게 商店', '추천 推荐']
       },
       {
-        number: '05', icon: '☕', page: 'episode5.html',
-        bg: 'linear-gradient(135deg, #92400E 0%, #D97706 100%)',
+        number: '04', icon: '🏪', page: '#',
+        thumbBg: '#F3F0FF',
         difficulty: 3,
-        tags: [{ label: '文化', color: 'pink' }, { label: 'Didi의 한국문화 Podcast', color: 'green' }],
-        title: '济州岛咖啡馆探店',
-        desc: '제주도 카페 탐방',
-        vocab: ['시켜보다 点来试试', '찍다 蘸', '흡입하다 疯狂吸入', '시그니처 招牌款']
+        tags: [{ label: '文化', color: 'pink' }, { label: '월간한국', color: 'blue' }],
+        title: '韩国传统市场探访',
+        desc: '전통시장에서 즐기는 한국 문화 체험',
+        vocab: ['시장 市场', '전통 传统', '체험 体验', '문화 文化']
       },
       {
-        number: '06', icon: '🦐', page: 'episode6.html',
-        bg: 'linear-gradient(135deg, #EA580C 0%, #FB923C 100%)',
-        difficulty: 2,
-        tags: [{ label: '美食', color: 'orange' }, { label: 'Didi의 한국문화 Podcast', color: 'green' }],
-        title: '韩国国民零食——虾条',
-        desc: '한국 국민 과자 새우깡',
-        vocab: ['새우깡 虾条', '국민 과자 国民零食', '안주 下酒菜', '노래방 KTV']
-      },
-      {
-        number: '07', icon: '🤢', page: 'episode7.html',
-        bg: 'linear-gradient(135deg, #4F46E5 0%, #818CF8 100%)',
-        difficulty: 2,
-        tags: [{ label: '旅行', color: 'green' }, { label: '러비한비LOVEYHANBI', color: 'pink' }],
-        title: '晕车与美食',
-        desc: '멀미와 맛집 탐방',
-        vocab: ['멀미 晕车', '울렁거리다 反胃', '잘 먹겠습니다 开动啦', '라볶이 拉面炒年糕']
-      },
-      {
-        number: '08', icon: '📝', page: 'episode8.html',
-        bg: 'linear-gradient(135deg, #0F766E 0%, #2DD4BF 100%)',
-        difficulty: 3,
-        tags: [{ label: '感悟', color: 'orange' }, { label: '시골쥐의 도시생활', color: 'blue' }],
-        title: '便利贴掌控潜意识',
-        desc: '메모로 무의식을 지배하기',
-        vocab: ['미루다 拖延', '무의식 潜意识', '낭비하다 浪费', '해치우다 搞定']
-      },
-      {
-        number: '09', icon: '😰', page: 'episode9.html',
-        bg: 'linear-gradient(135deg, #BE185D 0%, #F472B6 100%)',
-        difficulty: 3,
-        tags: [{ label: '感悟', color: 'pink' }, { label: '유어셀린 YourCeline', color: 'blue' }],
-        title: '上课怕被抽到',
-        desc: '발표 공포증 극복기',
-        vocab: ['발표하다 发言', '식은땀 冷汗', '두려워하다 害怕', '공포 恐惧']
+        number: '05', icon: '📧', page: 'episode1.html',
+        thumbBg: '#E8EFFF',
+        difficulty: 4,
+        tags: [{ label: '职场', color: 'blue' }, { label: '노말이', color: 'pink' }],
+        title: '职场邮件怎么写？',
+        desc: '학습 요청 메일을 효과적으로 쓰는 5가지 팁',
+        vocab: ['요청 请求', '걸다 挂/提交', '다면 如果', '돌리다 转动']
       }
     ];
 
-    // ===== State =====
     var activeTag = '全部';
     var activeDifficulty = null;
     var viewMode = 'grid';
 
-    // ===== Render =====
     function getFiltered() {
       return lessons.filter(function(l) {
         if (activeDifficulty !== null && l.difficulty !== activeDifficulty) return false;
@@ -523,12 +535,17 @@
       });
     }
 
+    function starsHTML(difficulty, max) {
+      var s = '';
+      for (var i = 0; i < max; i++) {
+        if (i < difficulty) s += '<span class="card-star filled">★</span>';
+        else s += '<span class="card-star empty">☆</span>';
+      }
+      return s;
+    }
+
     function renderGrid(items) {
       return items.map(function(l) {
-        var diffDots = '';
-        for (var i = 0; i < 5; i++) {
-          diffDots += '<span class="card-diff-dot' + (i < l.difficulty ? ' filled' : '') + '"></span>';
-        }
         var tags = l.tags.map(function(t) {
           return '<span class="card-tag card-tag-' + t.color + '">' + t.label + '</span>';
         }).join('');
@@ -537,15 +554,16 @@
         }).join('');
 
         return '<a href="' + l.page + '" class="lesson-card">' +
-          '<div class="card-thumb" style="background:' + l.bg + '">' +
+          '<div class="card-thumb" style="background:' + l.thumbBg + '">' +
+            '<div class="card-stars">' + starsHTML(l.difficulty, 4) + '</div>' +
             '<span class="ep-icon">' + l.icon + '</span>' +
-            '<div class="card-diff-dots">' + diffDots + '</div>' +
             '<span class="ep-number">' + l.number + '</span>' +
           '</div>' +
           '<div class="card-body">' +
             '<div class="card-tags-row">' + tags + '</div>' +
             '<h3>' + l.title + '</h3>' +
             '<p class="card-desc">' + l.desc + '</p>' +
+            '<div class="card-vocab-label">📝 本期核心词汇</div>' +
             '<div class="card-vocab">' + vocabs + '</div>' +
           '</div>' +
         '</a>';
@@ -555,7 +573,7 @@
     function renderList(items) {
       return items.map(function(l) {
         return '<a href="' + l.page + '" class="lesson-card-list">' +
-          '<div class="list-icon" style="background:' + l.bg + '">' + l.icon + '</div>' +
+          '<div class="list-icon" style="background:' + l.thumbBg + '">' + l.icon + '</div>' +
           '<div class="list-body">' +
             '<h3>' + l.title + '</h3>' +
             '<p class="card-desc">' + l.desc + '</p>' +
@@ -567,24 +585,22 @@
 
     function render() {
       var items = getFiltered();
-      document.getElementById('contentCount').textContent = '共 ' + items.length + ' 期内容';
+      document.getElementById('countNum').textContent = items.length;
       document.getElementById('lessonGrid').innerHTML = renderGrid(items);
       document.getElementById('lessonList').innerHTML = renderList(items);
       document.getElementById('emptyState').className = 'empty-state' + (items.length === 0 ? ' show' : '');
-
       document.getElementById('lessonGrid').style.display = viewMode === 'grid' ? '' : 'none';
       document.getElementById('lessonList').style.display = viewMode === 'list' ? '' : 'none';
     }
 
-    // ===== Events =====
-    // Difficulty buttons
-    document.getElementById('difficultyRow').addEventListener('click', function(e) {
-      var btn = e.target.closest('.diff-btn');
-      if (!btn) return;
-      var level = parseInt(btn.dataset.level);
+    // Difficulty cards
+    document.getElementById('diffGrid').addEventListener('click', function(e) {
+      var card = e.target.closest('.diff-card');
+      if (!card) return;
+      var level = parseInt(card.dataset.level);
       activeDifficulty = activeDifficulty === level ? null : level;
-      document.querySelectorAll('.diff-btn').forEach(function(b) {
-        b.classList.toggle('active', parseInt(b.dataset.level) === activeDifficulty);
+      document.querySelectorAll('.diff-card').forEach(function(c) {
+        c.classList.toggle('active', parseInt(c.dataset.level) === activeDifficulty);
       });
       render();
     });
@@ -603,18 +619,17 @@
     // View toggle
     document.getElementById('btnGrid').addEventListener('click', function() {
       viewMode = 'grid';
-      document.getElementById('btnGrid').classList.add('active');
+      this.classList.add('active');
       document.getElementById('btnList').classList.remove('active');
       render();
     });
     document.getElementById('btnList').addEventListener('click', function() {
       viewMode = 'list';
-      document.getElementById('btnList').classList.add('active');
+      this.classList.add('active');
       document.getElementById('btnGrid').classList.remove('active');
       render();
     });
 
-    // Initial render
     render();
   </script>
 
