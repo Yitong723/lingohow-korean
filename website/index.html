@@ -189,19 +189,22 @@
 
     /* Card thumbnail */
     .card-thumb {
-      position: relative; padding: 20px 20px 14px;
-      min-height: 160px; display: flex;
-      flex-direction: column; align-items: center; justify-content: center;
+      position: relative; padding: 0;
+      height: 160px; overflow: hidden;
       border-radius: var(--radius) var(--radius) 0 0;
     }
-    .card-thumb .ep-icon { font-size: 3.6rem; margin-bottom: 4px; }
+    .card-thumb .ep-cover {
+      width: 100%; height: 100%; object-fit: cover;
+    }
     .card-thumb .ep-number {
-      font-size: 1rem; font-weight: 600; color: rgba(0,0,0,0.15);
+      font-size: 1rem; font-weight: 600; color: rgba(255,255,255,0.7);
       position: absolute; right: 16px; bottom: 10px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
     }
     .card-stars {
-      position: absolute; top: 14px; right: 14px;
+      position: absolute; top: 10px; right: 10px;
       display: flex; gap: 2px;
+      background: rgba(255,255,255,0.85); border-radius: 8px; padding: 3px 6px;
     }
     .card-star {
       display: inline-block; width: 13px; height: 13px;
@@ -251,8 +254,7 @@
     .lesson-card-list:hover { box-shadow: var(--shadow-md); }
     .list-icon {
       width: 56px; height: 56px; border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.8rem; flex-shrink: 0; margin-top: 2px;
+      overflow: hidden; flex-shrink: 0; margin-top: 2px;
     }
     .list-body { flex: 1; min-width: 0; }
     .list-title-row { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
@@ -501,8 +503,7 @@
   <script>
     var lessons = [
       {
-        number: '01', icon: '📧', page: 'episode1.html',
-        thumbBg: '#E8EFFF',
+        number: '01', cover: 'media/covers/ep1.png', page: 'episode1.html',
         difficulty: 3,
         tags: [{ label: '职场', color: 'blue' }, { label: '노말이', color: 'pink' }],
         title: '职场邮件怎么写？',
@@ -510,8 +511,7 @@
         vocab: ['요청 请求', '걸다 挂/提交', '다면 如果']
       },
       {
-        number: '02', icon: '✈️', page: 'episode2.html',
-        thumbBg: '#ECFDF5',
+        number: '02', cover: 'media/covers/ep2.png', page: 'episode2.html',
         difficulty: 2,
         tags: [{ label: '旅行', color: 'green' }, { label: '월간한국', color: 'blue' }],
         title: '月刊韩国·济州岛之旅',
@@ -519,8 +519,7 @@
         vocab: ['여행 旅行', '비행기 飞机', '제주도 济州岛']
       },
       {
-        number: '03', icon: '🐷', page: 'episode3.html',
-        thumbBg: '#FFF1F2',
+        number: '03', cover: 'media/covers/ep3.png', page: 'episode3.html',
         difficulty: 2,
         tags: [{ label: '美食', color: 'orange' }, { label: 'Didi의 한국문화 Podcast', color: 'green' }],
         title: '济州岛暴风雪中的黑猪烤肉',
@@ -528,8 +527,7 @@
         vocab: ['눈보라 暴风雪', '맛집 美食店']
       },
       {
-        number: '04', icon: '🎁', page: 'episode4.html',
-        thumbBg: '#F3F0FF',
+        number: '04', cover: 'media/covers/ep4.png', page: 'episode4.html',
         difficulty: 3,
         tags: [{ label: '旅游', color: 'green' }, { label: 'Didi의 한국문화 Podcast', color: 'green' }],
         title: '济州岛纪念品店',
@@ -537,8 +535,7 @@
         vocab: ['기념품 纪念品', '돌하르방 石头爷爷']
       },
       {
-        number: '05', icon: '☕', page: 'episode5.html',
-        thumbBg: '#FFF8EE',
+        number: '05', cover: 'media/covers/ep5.png', page: 'episode5.html',
         difficulty: 3,
         tags: [{ label: '文化', color: 'pink' }, { label: 'Didi의 한국문화 Podcast', color: 'green' }],
         title: '济州岛咖啡馆探店',
@@ -546,8 +543,7 @@
         vocab: ['시켜보다 点来试试', '찍다 蘸', '시그니처 招牌款']
       },
       {
-        number: '06', icon: '🦐', page: 'episode6.html',
-        thumbBg: '#FFF1F2',
+        number: '06', cover: 'media/covers/ep6.png', page: 'episode6.html',
         difficulty: 2,
         tags: [{ label: '美食', color: 'orange' }, { label: 'Didi의 한국문화 Podcast', color: 'green' }],
         title: '韩国国民零食——虾条',
@@ -555,8 +551,7 @@
         vocab: ['새우깡 虾条', '국민 과자 国民零食']
       },
       {
-        number: '07', icon: '🤢', page: 'episode7.html',
-        thumbBg: '#E8EFFF',
+        number: '07', cover: 'media/covers/ep7.png', page: 'episode7.html',
         difficulty: 2,
         tags: [{ label: '旅行', color: 'green' }, { label: '러비한비LOVEYHANBI', color: 'pink' }],
         title: '晕车与美食',
@@ -564,8 +559,7 @@
         vocab: ['멀미 晕车', '울렁거리다 反胃']
       },
       {
-        number: '08', icon: '📝', page: 'episode8.html',
-        thumbBg: '#ECFDF5',
+        number: '08', cover: 'media/covers/ep8.png', page: 'episode8.html',
         difficulty: 3,
         tags: [{ label: '感悟', color: 'orange' }, { label: '시골쥐의 도시생활', color: 'blue' }],
         title: '便利贴掌控潜意识',
@@ -573,8 +567,7 @@
         vocab: ['미루다 拖延', '무의식 潜意识', '해치우다 搞定']
       },
       {
-        number: '09', icon: '😰', page: 'episode9.html',
-        thumbBg: '#F3F0FF',
+        number: '09', cover: 'media/covers/ep9.png', page: 'episode9.html',
         difficulty: 3,
         tags: [{ label: '感悟', color: 'pink' }, { label: '유어셀린 YourCeline', color: 'blue' }],
         title: '上课怕被抽到',
@@ -614,9 +607,9 @@
         }).join('');
 
         return '<a href="' + l.page + '" class="lesson-card">' +
-          '<div class="card-thumb" style="background:' + l.thumbBg + '">' +
+          '<div class="card-thumb">' +
+            '<img class="ep-cover" src="' + l.cover + '" alt="' + l.title + '">' +
             '<div class="card-stars">' + starsHTML(l.difficulty, 4) + '</div>' +
-            '<span class="ep-icon">' + l.icon + '</span>' +
             '<span class="ep-number">' + l.number + '</span>' +
           '</div>' +
           '<div class="card-body">' +
@@ -640,7 +633,7 @@
         }).join('');
 
         return '<a href="' + l.page + '" class="lesson-card-list">' +
-          '<div class="list-icon" style="background:' + l.thumbBg + '">' + l.icon + '</div>' +
+          '<div class="list-icon"><img src="' + l.cover + '" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" alt=""></div>' +
           '<div class="list-body">' +
             '<div class="list-title-row">' +
               '<h3>' + l.title + '</h3>' +
