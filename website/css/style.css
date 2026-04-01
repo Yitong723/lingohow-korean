@@ -525,7 +525,7 @@ a {
 
 .vocab-detail .def-kr {
   font-size: 0.82rem;
-  color: #6B7280;
+  color: #4B5563;
   margin-bottom: 6px;
   padding: 0;
   background: none;
@@ -577,8 +577,15 @@ a {
 .example-toggle .arrow {
   transition: transform 0.2s;
   font-size: 0.65rem;
-  color: #4F46E5;
+  color: inherit;
 }
+
+.vocab-card:nth-child(6n+1) .example-toggle .arrow { color: #2563EB; }
+.vocab-card:nth-child(6n+2) .example-toggle .arrow { color: #C73E3A; }
+.vocab-card:nth-child(6n+3) .example-toggle .arrow { color: #166534; }
+.vocab-card:nth-child(6n+4) .example-toggle .arrow { color: #7E3AB7; }
+.vocab-card:nth-child(6n+5) .example-toggle .arrow { color: #A16207; }
+.vocab-card:nth-child(6n)   .example-toggle .arrow { color: #0D9488; }
 
 .example-item.open .arrow {
   transform: rotate(90deg);
@@ -617,8 +624,8 @@ a {
 
 .related-section .label {
   font-size: 0.75rem;
-  font-weight: 600;
-  color: #9CA3AF;
+  font-weight: 700;
+  color: #4B5563;
   margin-bottom: 0;
 }
 
