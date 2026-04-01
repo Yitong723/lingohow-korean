@@ -519,25 +519,26 @@ a {
 }
 
 .vocab-detail {
-  padding: 0 18px 16px;
+  padding: 0 18px 12px;
   display: none;
   border-top: 1px solid var(--border);
 }
 
 .vocab-card.open .vocab-detail {
   display: block;
-  padding-top: 14px;
+  padding-top: 10px;
 }
 
 .vocab-detail .def-kr {
-  font-size: 0.85rem;
-  color: #374151;
-  margin-bottom: 10px;
-  padding: 10px 14px;
-  background: #F8F9FF;
-  border-radius: 8px;
-  border-left: 3px solid currentColor;
-  line-height: 1.7;
+  font-size: 0.82rem;
+  color: #6B7280;
+  margin-bottom: 6px;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  border-left: none;
+  line-height: 1.6;
+  font-style: italic;
 }
 
 .vocab-card:nth-child(1) .def-kr { border-left-color: #2563EB; }
@@ -550,8 +551,8 @@ a {
 .vocab-card:nth-child(8) .def-kr { border-left-color: #7E3AB7; }
 
 .vocab-detail .note {
-  font-size: 0.85rem;
-  margin-bottom: 10px;
+  font-size: 0.82rem;
+  margin-bottom: 4px;
   font-style: italic;
 }
 
@@ -565,27 +566,27 @@ a {
 .vocab-card:nth-child(8) .note { color: #7E3AB7; }
 
 .example-group {
-  margin: 10px 0;
+  margin: 4px 0;
 }
 
 .example-item {
-  margin: 8px 0;
+  margin: 2px 0;
 }
 
 .example-toggle {
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: #1F2937;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 0;
+  gap: 5px;
+  padding: 4px 0;
   font-weight: 500;
 }
 
 .example-toggle .arrow {
   transition: transform 0.2s;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: #4F46E5;
 }
 
@@ -595,13 +596,13 @@ a {
 
 .example-kr {
   display: none;
-  padding: 8px 12px 8px 20px;
-  font-size: 0.9rem;
+  padding: 2px 0 2px 18px;
+  font-size: 0.88rem;
   color: #1F2937;
   font-weight: 600;
-  background: #FAFBFC;
-  border-radius: 6px;
-  margin-top: 4px;
+  background: none;
+  border-radius: 0;
+  margin-top: 0;
 }
 
 /* 例句中关键词高亮跟随卡片颜色 */
@@ -619,29 +620,31 @@ a {
 }
 
 .related-section {
-  margin-top: 10px;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .related-section .label {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #6B7280;
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #9CA3AF;
+  margin-bottom: 0;
 }
 
 .related-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
 }
 
 .related-item {
-  font-size: 0.8rem;
-  padding: 4px 10px;
+  font-size: 0.75rem;
+  padding: 2px 8px;
   background: #EEF2FF;
-  border-radius: 6px;
+  border-radius: 4px;
   color: #3730A3;
   font-weight: 500;
 }
