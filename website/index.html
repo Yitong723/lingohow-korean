@@ -227,6 +227,7 @@
 
     .card-body h3 {
       font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; color: var(--text);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .card-body .card-desc {
       font-size: 0.78rem; color: #6B7280; margin-bottom: 12px;
@@ -258,7 +259,7 @@
     }
     .list-body { flex: 1; min-width: 0; }
     .list-title-row { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
-    .list-title-row h3 { font-size: 0.95rem; font-weight: 700; }
+    .list-title-row h3 { font-size: 0.95rem; font-weight: 700; white-space: nowrap; }
     .list-title-row .list-stars { display: flex; gap: 1px; }
     .list-title-row .card-star { width: 11px; height: 11px; }
     .list-body .list-desc { font-size: 0.8rem; color: #6B7280; margin-bottom: 8px; }
@@ -514,7 +515,7 @@
         number: '02', cover: 'media/covers/ep2.png', page: 'episode2.html',
         difficulty: 2,
         tags: [{ label: '旅行', color: 'green' }, { label: '월간한국', color: 'blue' }],
-        title: '月刊韩国·济州岛之旅',
+        title: '济州岛之旅',
         desc: '제주도 겨울 여행 브이로그',
         vocab: ['여행 旅行', '비행기 飞机', '제주도 济州岛']
       },
@@ -522,7 +523,7 @@
         number: '03', cover: 'media/covers/ep3.png', page: 'episode3.html',
         difficulty: 2,
         tags: [{ label: '美食', color: 'orange' }, { label: 'Didi의 한국문화 Podcast', color: 'green' }],
-        title: '济州岛暴风雪中的黑猪烤肉',
+        title: '暴风雪中的黑猪烤肉',
         desc: '제주도 눈보라 속 흑돼지구이',
         vocab: ['눈보라 暴风雪', '맛집 美食店']
       },
@@ -538,7 +539,7 @@
         number: '05', cover: 'media/covers/ep5.png', page: 'episode5.html',
         difficulty: 3,
         tags: [{ label: '文化', color: 'pink' }, { label: 'Didi의 한국문화 Podcast', color: 'green' }],
-        title: '济州岛咖啡馆探店',
+        title: '济州岛咖啡馆',
         desc: '제주도 카페 탐방',
         vocab: ['시켜보다 点来试试', '찍다 蘸', '시그니처 招牌款']
       },
@@ -546,7 +547,7 @@
         number: '06', cover: 'media/covers/ep6.png', page: 'episode6.html',
         difficulty: 2,
         tags: [{ label: '美食', color: 'orange' }, { label: 'Didi의 한국문화 Podcast', color: 'green' }],
-        title: '韩国国民零食——虾条',
+        title: '国民零食虾条',
         desc: '한국 국민 과자 새우깡',
         vocab: ['새우깡 虾条', '국민 과자 国民零食']
       },
@@ -610,11 +611,10 @@
           '<div class="card-thumb">' +
             '<img class="ep-cover" src="' + l.cover + '" alt="' + l.title + '">' +
             '<div class="card-stars">' + starsHTML(l.difficulty, 4) + '</div>' +
-            '<span class="ep-number">' + l.number + '</span>' +
           '</div>' +
           '<div class="card-body">' +
             '<div class="card-tags-row">' + tags + '</div>' +
-            '<h3>' + l.title + '</h3>' +
+            '<h3>EP' + l.number + ' ' + l.title + '</h3>' +
             '<p class="card-desc">' + l.desc + '</p>' +
             '<div class="card-vocab-label">📝 本期核心词汇</div>' +
             '<div class="card-vocab">' + vocabs + '</div>' +
@@ -636,7 +636,7 @@
           '<div class="list-icon"><img src="' + l.cover + '" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" alt=""></div>' +
           '<div class="list-body">' +
             '<div class="list-title-row">' +
-              '<h3>' + l.title + '</h3>' +
+              '<h3>EP' + l.number + ' ' + l.title + '</h3>' +
               '<div class="list-stars">' + starsHTML(l.difficulty, 4) + '</div>' +
             '</div>' +
             '<p class="list-desc">' + l.desc + '</p>' +
@@ -646,7 +646,6 @@
               '<div class="list-vocab">' + vocabs + '</div>' +
             '</div>' +
           '</div>' +
-          '<span class="list-number">' + l.number + '</span>' +
         '</a>';
       }).join('');
     }
