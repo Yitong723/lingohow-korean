@@ -543,9 +543,11 @@ a {
 .vocab-card:nth-child(6n)   .def-kr { border-left-color: #0D9488; }
 
 .vocab-detail .note {
-  font-size: 0.82rem;
-  margin-bottom: 4px;
-  font-style: italic;
+  font-size: 0.88rem;
+  margin-bottom: 6px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.7;
 }
 
 .vocab-card:nth-child(6n+1) .note { color: #2563EB; }
