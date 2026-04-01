@@ -436,14 +436,12 @@ a {
   border-left: 3px solid var(--blue);
 }
 
-.vocab-card:nth-child(1) { border-left-color: #2563EB; }
-.vocab-card:nth-child(2) { border-left-color: #C73E3A; }
-.vocab-card:nth-child(3) { border-left-color: #166534; }
-.vocab-card:nth-child(4) { border-left-color: #7E3AB7; }
-.vocab-card:nth-child(5) { border-left-color: #A16207; }
-.vocab-card:nth-child(6) { border-left-color: #0D9488; }
-.vocab-card:nth-child(7) { border-left-color: #C73E3A; }
-.vocab-card:nth-child(8) { border-left-color: #7E3AB7; }
+.vocab-card:nth-child(6n+1) { border-left-color: #2563EB; }
+.vocab-card:nth-child(6n+2) { border-left-color: #C73E3A; }
+.vocab-card:nth-child(6n+3) { border-left-color: #166534; }
+.vocab-card:nth-child(6n+4) { border-left-color: #7E3AB7; }
+.vocab-card:nth-child(6n+5) { border-left-color: #A16207; }
+.vocab-card:nth-child(6n)   { border-left-color: #0D9488; }
 
 .vocab-header {
   padding: 14px 18px;
@@ -471,14 +469,12 @@ a {
   color: var(--text);
 }
 
-.vocab-card:nth-child(1) .vocab-word .kr { color: #2563EB; }
-.vocab-card:nth-child(2) .vocab-word .kr { color: #C73E3A; }
-.vocab-card:nth-child(3) .vocab-word .kr { color: #166534; }
-.vocab-card:nth-child(4) .vocab-word .kr { color: #7E3AB7; }
-.vocab-card:nth-child(5) .vocab-word .kr { color: #A16207; }
-.vocab-card:nth-child(6) .vocab-word .kr { color: #0D9488; }
-.vocab-card:nth-child(7) .vocab-word .kr { color: #C73E3A; }
-.vocab-card:nth-child(8) .vocab-word .kr { color: #7E3AB7; }
+.vocab-card:nth-child(6n+1) .vocab-word .kr { color: #2563EB; }
+.vocab-card:nth-child(6n+2) .vocab-word .kr { color: #C73E3A; }
+.vocab-card:nth-child(6n+3) .vocab-word .kr { color: #166534; }
+.vocab-card:nth-child(6n+4) .vocab-word .kr { color: #7E3AB7; }
+.vocab-card:nth-child(6n+5) .vocab-word .kr { color: #A16207; }
+.vocab-card:nth-child(6n)   .vocab-word .kr { color: #0D9488; }
 
 .vocab-word .roma {
   font-size: 0.8rem;
@@ -499,14 +495,12 @@ a {
   font-weight: 500;
 }
 
-.vocab-card:nth-child(1) .pos { background: #EEF2F9; color: #2563EB; }
-.vocab-card:nth-child(2) .pos { background: #FEF2F2; color: #C73E3A; }
-.vocab-card:nth-child(3) .pos { background: #F0FDF4; color: #166534; }
-.vocab-card:nth-child(4) .pos { background: #F5F0FF; color: #7E3AB7; }
-.vocab-card:nth-child(5) .pos { background: #FFFBEB; color: #A16207; }
-.vocab-card:nth-child(6) .pos { background: #F0FDFA; color: #0D9488; }
-.vocab-card:nth-child(7) .pos { background: #FEF2F2; color: #C73E3A; }
-.vocab-card:nth-child(8) .pos { background: #F5F0FF; color: #7E3AB7; }
+.vocab-card:nth-child(6n+1) .pos { background: #EEF2F9; color: #2563EB; }
+.vocab-card:nth-child(6n+2) .pos { background: #FEF2F2; color: #C73E3A; }
+.vocab-card:nth-child(6n+3) .pos { background: #F0FDF4; color: #166534; }
+.vocab-card:nth-child(6n+4) .pos { background: #F5F0FF; color: #7E3AB7; }
+.vocab-card:nth-child(6n+5) .pos { background: #FFFBEB; color: #A16207; }
+.vocab-card:nth-child(6n)   .pos { background: #F0FDFA; color: #0D9488; }
 
 .vocab-toggle {
   font-size: 1rem;
@@ -541,14 +535,12 @@ a {
   font-style: italic;
 }
 
-.vocab-card:nth-child(1) .def-kr { border-left-color: #2563EB; }
-.vocab-card:nth-child(2) .def-kr { border-left-color: #C73E3A; }
-.vocab-card:nth-child(3) .def-kr { border-left-color: #166534; }
-.vocab-card:nth-child(4) .def-kr { border-left-color: #7E3AB7; }
-.vocab-card:nth-child(5) .def-kr { border-left-color: #A16207; }
-.vocab-card:nth-child(6) .def-kr { border-left-color: #0D9488; }
-.vocab-card:nth-child(7) .def-kr { border-left-color: #C73E3A; }
-.vocab-card:nth-child(8) .def-kr { border-left-color: #7E3AB7; }
+.vocab-card:nth-child(6n+1) .def-kr { border-left-color: #2563EB; }
+.vocab-card:nth-child(6n+2) .def-kr { border-left-color: #C73E3A; }
+.vocab-card:nth-child(6n+3) .def-kr { border-left-color: #166534; }
+.vocab-card:nth-child(6n+4) .def-kr { border-left-color: #7E3AB7; }
+.vocab-card:nth-child(6n+5) .def-kr { border-left-color: #A16207; }
+.vocab-card:nth-child(6n)   .def-kr { border-left-color: #0D9488; }
 
 .vocab-detail .note {
   font-size: 0.82rem;
@@ -556,14 +548,12 @@ a {
   font-style: italic;
 }
 
-.vocab-card:nth-child(1) .note { color: #2563EB; }
-.vocab-card:nth-child(2) .note { color: #C73E3A; }
-.vocab-card:nth-child(3) .note { color: #166534; }
-.vocab-card:nth-child(4) .note { color: #7E3AB7; }
-.vocab-card:nth-child(5) .note { color: #A16207; }
-.vocab-card:nth-child(6) .note { color: #0D9488; }
-.vocab-card:nth-child(7) .note { color: #C73E3A; }
-.vocab-card:nth-child(8) .note { color: #7E3AB7; }
+.vocab-card:nth-child(6n+1) .note { color: #2563EB; }
+.vocab-card:nth-child(6n+2) .note { color: #C73E3A; }
+.vocab-card:nth-child(6n+3) .note { color: #166534; }
+.vocab-card:nth-child(6n+4) .note { color: #7E3AB7; }
+.vocab-card:nth-child(6n+5) .note { color: #A16207; }
+.vocab-card:nth-child(6n)   .note { color: #0D9488; }
 
 .example-group {
   margin: 4px 0;
@@ -606,14 +596,12 @@ a {
 }
 
 /* 例句中关键词高亮跟随卡片颜色 */
-.vocab-card:nth-child(1) .example-kr .kw { color: #2563EB; background: rgba(27,58,107,0.08); padding: 0 2px; border-radius: 2px; }
-.vocab-card:nth-child(2) .example-kr .kw { color: #C73E3A; background: rgba(199,62,58,0.08); padding: 0 2px; border-radius: 2px; }
-.vocab-card:nth-child(3) .example-kr .kw { color: #166534; background: rgba(22,101,52,0.08); padding: 0 2px; border-radius: 2px; }
-.vocab-card:nth-child(4) .example-kr .kw { color: #7E3AB7; background: rgba(126,58,183,0.08); padding: 0 2px; border-radius: 2px; }
-.vocab-card:nth-child(5) .example-kr .kw { color: #A16207; background: rgba(161,98,7,0.08); padding: 0 2px; border-radius: 2px; }
-.vocab-card:nth-child(6) .example-kr .kw { color: #0D9488; background: rgba(13,148,136,0.08); padding: 0 2px; border-radius: 2px; }
-.vocab-card:nth-child(7) .example-kr .kw { color: #C73E3A; background: rgba(199,62,58,0.08); padding: 0 2px; border-radius: 2px; }
-.vocab-card:nth-child(8) .example-kr .kw { color: #7E3AB7; background: rgba(126,58,183,0.08); padding: 0 2px; border-radius: 2px; }
+.vocab-card:nth-child(6n+1) .example-kr .kw { color: #2563EB; background: rgba(37,99,235,0.08); padding: 0 2px; border-radius: 2px; }
+.vocab-card:nth-child(6n+2) .example-kr .kw { color: #C73E3A; background: rgba(199,62,58,0.08); padding: 0 2px; border-radius: 2px; }
+.vocab-card:nth-child(6n+3) .example-kr .kw { color: #166534; background: rgba(22,101,52,0.08); padding: 0 2px; border-radius: 2px; }
+.vocab-card:nth-child(6n+4) .example-kr .kw { color: #7E3AB7; background: rgba(126,58,183,0.08); padding: 0 2px; border-radius: 2px; }
+.vocab-card:nth-child(6n+5) .example-kr .kw { color: #A16207; background: rgba(161,98,7,0.08); padding: 0 2px; border-radius: 2px; }
+.vocab-card:nth-child(6n)   .example-kr .kw { color: #0D9488; background: rgba(13,148,136,0.08); padding: 0 2px; border-radius: 2px; }
 
 .example-item.open .example-kr {
   display: block;
