@@ -328,7 +328,7 @@ a {
 
 .step-title p {
   font-size: 0.8rem;
-  color: #7E8EAE;
+  color: #6B82B0;
   margin-top: 2px;
 }
 
@@ -478,7 +478,7 @@ a {
 
 .vocab-word .roma {
   font-size: 0.8rem;
-  color: #9AABCA;
+  color: #8DA4C4;
   font-weight: 500;
 }
 
@@ -641,9 +641,9 @@ a {
 .related-item {
   font-size: 0.75rem;
   padding: 2px 8px;
-  background: #EDF0F6;
+  background: #E8EDF5;
   border-radius: 4px;
-  color: #5A6B8A;
+  color: #4A6B95;
   font-weight: 500;
 }
 
