@@ -482,12 +482,14 @@ a {
 
 .vocab-word .roma {
   font-size: 0.8rem;
-  color: var(--text-light);
+  color: #818CF8;
+  font-weight: 500;
 }
 
 .vocab-word .meaning {
   font-size: 0.9rem;
-  color: var(--text);
+  color: #1F2937;
+  font-weight: 600;
 }
 
 .vocab-word .pos {
@@ -529,12 +531,13 @@ a {
 
 .vocab-detail .def-kr {
   font-size: 0.85rem;
-  color: var(--text-light);
+  color: #374151;
   margin-bottom: 10px;
-  padding: 8px 12px;
-  background: #F9FAFB;
-  border-radius: 6px;
+  padding: 10px 14px;
+  background: #F8F9FF;
+  border-radius: 8px;
   border-left: 3px solid currentColor;
+  line-height: 1.7;
 }
 
 .vocab-card:nth-child(1) .def-kr { border-left-color: #1B3A6B; }
@@ -572,17 +575,18 @@ a {
 .example-toggle {
   cursor: pointer;
   font-size: 0.9rem;
-  color: var(--text);
+  color: #1F2937;
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 6px 0;
+  font-weight: 500;
 }
 
 .example-toggle .arrow {
   transition: transform 0.2s;
   font-size: 0.7rem;
-  color: var(--text-light);
+  color: #4F46E5;
 }
 
 .example-item.open .arrow {
@@ -591,10 +595,13 @@ a {
 
 .example-kr {
   display: none;
-  padding: 6px 0 6px 20px;
+  padding: 8px 12px 8px 20px;
   font-size: 0.9rem;
-  color: var(--text);
+  color: #1F2937;
   font-weight: 600;
+  background: #FAFBFC;
+  border-radius: 6px;
+  margin-top: 4px;
 }
 
 /* 例句中关键词高亮跟随卡片颜色 */
@@ -616,10 +623,12 @@ a {
 }
 
 .related-section .label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-light);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #6B7280;
   margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .related-list {
@@ -631,9 +640,10 @@ a {
 .related-item {
   font-size: 0.8rem;
   padding: 4px 10px;
-  background: #F3F4F6;
+  background: #EEF2FF;
   border-radius: 6px;
-  color: var(--text);
+  color: #3730A3;
+  font-weight: 500;
 }
 
 /* ===== 词汇音频按钮 ===== */
