@@ -328,7 +328,7 @@ a {
 
 .step-title p {
   font-size: 0.8rem;
-  color: #4F46E5;
+  color: #7E8EAE;
   margin-top: 2px;
 }
 
@@ -478,7 +478,7 @@ a {
 
 .vocab-word .roma {
   font-size: 0.8rem;
-  color: #818CF8;
+  color: #9AABCA;
   font-weight: 500;
 }
 
@@ -524,7 +524,7 @@ a {
 }
 
 .vocab-detail .def-kr {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   color: #4B5563;
   margin-bottom: 6px;
   padding: 0;
@@ -532,7 +532,8 @@ a {
   border-radius: 0;
   border-left: none;
   line-height: 1.6;
-  font-style: italic;
+  font-style: normal;
+  font-weight: 600;
 }
 
 .vocab-card:nth-child(6n+1) .def-kr { border-left-color: #2563EB; }
@@ -640,9 +641,9 @@ a {
 .related-item {
   font-size: 0.75rem;
   padding: 2px 8px;
-  background: #EEF2FF;
+  background: #EDF0F6;
   border-radius: 4px;
-  color: #3730A3;
+  color: #5A6B8A;
   font-weight: 500;
 }
 
