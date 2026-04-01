@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 
 :root {
-  --blue: #1B3A6B;
+  --blue: #2563EB;
   --blue-light: #2A5298;
   --red: #C73E3A;
   --red-light: #E8524E;
@@ -378,7 +378,7 @@ a {
 /* 多色高亮 — 不同词汇用不同颜色 */
 .hl-blue {
   background: linear-gradient(180deg, transparent 60%, rgba(27,58,107,0.18) 60%);
-  color: #1B3A6B;
+  color: #2563EB;
 }
 .hl-red {
   background: linear-gradient(180deg, transparent 60%, rgba(199,62,58,0.18) 60%);
@@ -436,7 +436,7 @@ a {
   border-left: 3px solid var(--blue);
 }
 
-.vocab-card:nth-child(1) { border-left-color: #1B3A6B; }
+.vocab-card:nth-child(1) { border-left-color: #2563EB; }
 .vocab-card:nth-child(2) { border-left-color: #C73E3A; }
 .vocab-card:nth-child(3) { border-left-color: #166534; }
 .vocab-card:nth-child(4) { border-left-color: #7E3AB7; }
@@ -471,7 +471,7 @@ a {
   color: var(--text);
 }
 
-.vocab-card:nth-child(1) .vocab-word .kr { color: #1B3A6B; }
+.vocab-card:nth-child(1) .vocab-word .kr { color: #2563EB; }
 .vocab-card:nth-child(2) .vocab-word .kr { color: #C73E3A; }
 .vocab-card:nth-child(3) .vocab-word .kr { color: #166534; }
 .vocab-card:nth-child(4) .vocab-word .kr { color: #7E3AB7; }
@@ -499,7 +499,7 @@ a {
   font-weight: 500;
 }
 
-.vocab-card:nth-child(1) .pos { background: #EEF2F9; color: #1B3A6B; }
+.vocab-card:nth-child(1) .pos { background: #EEF2F9; color: #2563EB; }
 .vocab-card:nth-child(2) .pos { background: #FEF2F2; color: #C73E3A; }
 .vocab-card:nth-child(3) .pos { background: #F0FDF4; color: #166534; }
 .vocab-card:nth-child(4) .pos { background: #F5F0FF; color: #7E3AB7; }
@@ -540,7 +540,7 @@ a {
   line-height: 1.7;
 }
 
-.vocab-card:nth-child(1) .def-kr { border-left-color: #1B3A6B; }
+.vocab-card:nth-child(1) .def-kr { border-left-color: #2563EB; }
 .vocab-card:nth-child(2) .def-kr { border-left-color: #C73E3A; }
 .vocab-card:nth-child(3) .def-kr { border-left-color: #166534; }
 .vocab-card:nth-child(4) .def-kr { border-left-color: #7E3AB7; }
@@ -555,7 +555,7 @@ a {
   font-style: italic;
 }
 
-.vocab-card:nth-child(1) .note { color: #1B3A6B; }
+.vocab-card:nth-child(1) .note { color: #2563EB; }
 .vocab-card:nth-child(2) .note { color: #C73E3A; }
 .vocab-card:nth-child(3) .note { color: #166534; }
 .vocab-card:nth-child(4) .note { color: #7E3AB7; }
@@ -605,7 +605,7 @@ a {
 }
 
 /* 例句中关键词高亮跟随卡片颜色 */
-.vocab-card:nth-child(1) .example-kr .kw { color: #1B3A6B; background: rgba(27,58,107,0.08); padding: 0 2px; border-radius: 2px; }
+.vocab-card:nth-child(1) .example-kr .kw { color: #2563EB; background: rgba(27,58,107,0.08); padding: 0 2px; border-radius: 2px; }
 .vocab-card:nth-child(2) .example-kr .kw { color: #C73E3A; background: rgba(199,62,58,0.08); padding: 0 2px; border-radius: 2px; }
 .vocab-card:nth-child(3) .example-kr .kw { color: #166534; background: rgba(22,101,52,0.08); padding: 0 2px; border-radius: 2px; }
 .vocab-card:nth-child(4) .example-kr .kw { color: #7E3AB7; background: rgba(126,58,183,0.08); padding: 0 2px; border-radius: 2px; }
@@ -863,7 +863,7 @@ a {
   font-weight: 500;
 }
 
-.blank.revealed.bl-blue { color: #1B3A6B; }
+.blank.revealed.bl-blue { color: #2563EB; }
 .blank.revealed.bl-red { color: #C73E3A; }
 .blank.revealed.bl-green { color: #166534; }
 .blank.revealed.bl-purple { color: #7E3AB7; }
