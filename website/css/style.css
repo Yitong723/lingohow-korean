@@ -363,11 +363,13 @@ a {
 
 .text-block.korean {
   font-size: 1.05rem;
+  font-weight: 600;
 }
 
 .text-block.chinese {
-  color: var(--text-light);
+  color: #4B5563;
   font-size: 0.95rem;
+  font-weight: 600;
 }
 
 .text-block .highlight {
@@ -743,7 +745,7 @@ a {
 
 .sentence-item .kr {
   font-size: 1.05rem;
-  font-weight: 500;
+  font-weight: 700;
   margin-bottom: 4px;
 }
 
@@ -757,7 +759,8 @@ a {
 
 .sentence-item .cn {
   font-size: 0.85rem;
-  color: var(--text-light);
+  color: #4B5563;
+  font-weight: 600;
   padding-left: 30px;
 }
 
